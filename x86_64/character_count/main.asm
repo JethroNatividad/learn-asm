@@ -37,3 +37,9 @@ _getInput:
     mov rsi, input
     mov rdx, input_len
     syscall
+
+_convertLengthToString:
+    ; TODO
+
+_displayLength:
+    ; TODO
