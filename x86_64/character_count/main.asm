@@ -7,7 +7,6 @@ section .data
     prompt db "What is the input string? "
     prompt_len equ $ - prompt
 
-
 section .bss
     input_len equ 100
     input resb input_len
@@ -24,8 +23,8 @@ _start:
 
     mov rax, 0
     mov rdi, 0
-    mov rsi input
-    mov rdx input_len
+    mov rsi, input
+    mov rdx, input_len
     syscall
 
     mov rax, 60
