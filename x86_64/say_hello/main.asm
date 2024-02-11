@@ -5,8 +5,16 @@
 
 section .data
     prompt db "What is your name? "
+    promptLen equ $ - prompt
+    
     preNameMessage db "Hello, "
+    preNameMessageLen equ $ - preNameMessage
+
     postNameMessage db ", nice to meet you!", 10
+    postNameMessageLen equ $ - postNameMessage
+
+section .bss
+    name resb 100
 
 section .text
     global _start
