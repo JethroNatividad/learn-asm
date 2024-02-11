@@ -4,17 +4,20 @@
 ; output: the message
 
 section .data
-    text db "Hello, World!", 10 ;define bytes "Hello, World!\n"
+    prompt db "What is your name? "
+    preNameMessage db "Hello, "
+    postNameMessage db ", nice to meet you!", 10
 
 section .text
     global _start
 
 _start:
-    mov rax, 1
-    mov rdi, 1
+    mov rax, 1 ;set syscall id to 1 which is sys_write
+    mov rdi, 1 ;set first argument to 1 tosys_write which means standard output
     mov rsi, text
     mov rdx, 14
     syscall
+
 
     mov rax, 60
     mov rdi, 0
