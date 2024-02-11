@@ -11,6 +11,7 @@ section .data
 section .bss
     input_len equ 100
     input resb input_len
+    len_string resb 8
 
 section .text
     global _start
@@ -43,16 +44,24 @@ _getInput:
 
 
 _convertLengthToString:
-    ; TODO
-    add rax, 48
-    mov [digit], al
+    mov rcx, 0 ;counter
+_convertLengthToStringLoop:
+    mov rsi, len_string
+    mov rdx, 0
+    mov rbx, 10
+    div rbx
+    add rdx, '0' ; convert the remainder to an ASCII character
+    mov byte [rsi + rcx], dl ; store the character in the buffer
+    inc rcx
+    cmp rax, 0
+    jne _convertLengthToStringLoop
     ret
 
 _displayLength:
     ; TODO
     mov rax, 1
     mov rdi, 1
-    mov rsi, digit
+    mov rsi, len_string
     mov rdx, 2
     syscall
     ret
