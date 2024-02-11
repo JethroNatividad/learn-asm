@@ -11,7 +11,7 @@ _start:
     mov rax, input
     call _factorial
     call _printFactorial
-    
+
 
     ; END
     mov rax, 60
@@ -45,7 +45,7 @@ _convertToStringLoop:
     mov byte [rsi + rcx], dl ; store the character in the buffer
     inc rcx
     cmp rax, 0
-    jne _convertLengthToStringLoop
+    jne _convertToStringLoop
     ret
 
 _printFactorial:
