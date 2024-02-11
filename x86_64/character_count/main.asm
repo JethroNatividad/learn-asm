@@ -30,6 +30,7 @@ _displayPrompt:
     mov rsi, prompt
     mov rdx, prompt_len
     syscall
+    ret
 
 _getInput:
     mov rax, 0
@@ -37,9 +38,13 @@ _getInput:
     mov rsi, input
     mov rdx, input_len
     syscall
+    ret
+
 
 _convertLengthToString:
     ; TODO
+    ret
 
 _displayLength:
     ; TODO
+    ret
