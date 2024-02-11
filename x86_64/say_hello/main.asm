@@ -44,3 +44,23 @@ _getName:
     mov rdx, nameLen
     syscall
     ret
+
+_displayGreeting:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, preNameMessage
+    mov rdx, preNameMessageLen
+    syscall
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, name
+    mov rdx, nameLen
+    syscall
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, postNameMessage
+    mov rdx, postNameMessageLen
+    syscall
+    ret
