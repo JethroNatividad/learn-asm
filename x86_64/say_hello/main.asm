@@ -44,7 +44,7 @@ _getName:
     mov rdx, nameLen
     syscall
 
-    dec rax 
+    dec rax
     mov byte [rsi + rax], 0
     ret
 
