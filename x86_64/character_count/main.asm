@@ -9,7 +9,7 @@ section .data
 
     output_text_1 db " has "
     output_text_1_len equ $ - output_text_1
-    output_text_2 db " characters."
+    output_text_2 db " characters.", 10
     output_text_2_len equ $ - output_text_2
 
 
