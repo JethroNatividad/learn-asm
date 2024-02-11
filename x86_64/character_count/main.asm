@@ -6,7 +6,9 @@
 section .data
     prompt db "What is the input string? "
     prompt_len equ $ - prompt
-    digit db 0, 10
+
+    outputText1 db " has "
+    outputText2 db " characters."
 
 section .bss
     input_len equ 100
@@ -58,6 +60,8 @@ _convertLengthToStringLoop:
     ret
 
 _displayLength:
+
+    mov byte
     ; TODO
     mov rax, 1
     mov rdi, 1
