@@ -1,5 +1,5 @@
 section .data
-    input dd 5
+    input db 5
 
 section .bss
     output resb 8
@@ -8,10 +8,10 @@ section .text
     global _start
 
 _start:
-    mov rax, input
+    mov rax, [input]
     call _factorial
+    call _convertToString
     call _printFactorial
-
 
     ; END
     mov rax, 60
@@ -21,14 +21,13 @@ _start:
 ; input: value from rax
 ; output: factorial to rax
 _factorial:
-    mov rcx, rax ; total product
+    mov rcx, rax ; lower value
 _factorialLoop:
-    sub rax, 1
+    dec rcx
     mul rcx
 
-    cmp rax, 1
+    cmp rcx, 1
     jg _factorialLoop
-    mov rax, rcx
     ret
 
 ; input: value from rax
@@ -54,3 +53,4 @@ _printFactorial:
     mov rsi, output
     mov rdx, 8
     syscall
+    ret
