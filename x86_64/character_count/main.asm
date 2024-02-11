@@ -1,0 +1,1 @@
+; Program that takes in an input, and outputs the number of characters it has.
