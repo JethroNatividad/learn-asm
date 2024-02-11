@@ -6,7 +6,7 @@
 section .data
     prompt db "What is your name? "
     promptLen equ $ - prompt
-    
+
     preNameMessage db "Hello, "
     preNameMessageLen equ $ - preNameMessage
 
@@ -14,18 +14,16 @@ section .data
     postNameMessageLen equ $ - postNameMessage
 
 section .bss
-    name resb 100
+    nameLen equ 50
+    name resb nameLen
 
 section .text
     global _start
 
 _start:
-    mov rax, 1 ;set syscall id to 1 which is sys_write
-    mov rdi, 1 ;set first argument to 1 tosys_write which means standard output
-    mov rsi, text
-    mov rdx, 14
-    syscall
-
+    call _displayPrompt
+    call _getName
+    call _displayGreeting
 
     mov rax, 60
     mov rdi, 0
