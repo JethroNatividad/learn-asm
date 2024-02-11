@@ -7,8 +7,11 @@ section .data
     prompt db "What is the input string? "
     prompt_len equ $ - prompt
 
-    outputText1 db " has "
-    outputText2 db " characters."
+    output_text_1 db " has "
+    output_text_1_len equ $ - output_text_1
+    output_text_2 db " characters."
+    output_text_2_len equ $ - output_text_2
+
 
 section .bss
     input_len equ 100
@@ -47,6 +50,7 @@ _getInput:
 
 _convertLengthToString:
     mov rcx, 0 ;counter
+
 _convertLengthToStringLoop:
     mov rsi, len_string
     mov rdx, 0
@@ -60,12 +64,27 @@ _convertLengthToStringLoop:
     ret
 
 _displayLength:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, input
+    mov rdx, input_len
+    syscall
 
-    mov byte
-    ; TODO
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, output_text_1
+    mov rdx, output_text_1_len
+    syscall
+
     mov rax, 1
     mov rdi, 1
     mov rsi, len_string
-    mov rdx, 2
+    mov rdx, 8
+    syscall
+
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, output_text_2
+    mov rdx, output_text_2_len
     syscall
     ret
