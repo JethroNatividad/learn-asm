@@ -1,11 +1,12 @@
 ; Program that takes in an input, and outputs the number of characters it has.
 ; inputs: input
 ; process: count the number of characters
-; output: the number of characters
+; output: {input} has {len} characters.
 
 section .data
     prompt db "What is the input string? "
     prompt_len equ $ - prompt
+
 
 section .bss
     input_len equ 100
