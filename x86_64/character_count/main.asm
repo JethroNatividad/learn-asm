@@ -48,7 +48,10 @@ _getInput:
 
     mov rcx, rax
     dec rcx
+    cmp byte [rsi + rcx], 10
+    jne _getInputRet
     mov byte [rsi + rcx], 0
+_getInputRet:
     ret
 
 
