@@ -6,6 +6,7 @@
 section .data
     prompt db "What is the input string? "
     prompt_len equ $ - prompt
+    digit db 0, 10
 
 section .bss
     input_len equ 100
@@ -43,8 +44,15 @@ _getInput:
 
 _convertLengthToString:
     ; TODO
+    add rax, 48
+    mov [digit], al
     ret
 
 _displayLength:
     ; TODO
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, digit
+    mov rdx, 2
+    syscall
     ret
