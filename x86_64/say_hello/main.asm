@@ -28,3 +28,9 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
+
+_displayPrompt:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, prompt
+    mov rdx, promptLen
