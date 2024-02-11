@@ -15,6 +15,11 @@ section .text
     global _start
 
 _start:
+    call _displayPrompt
+    call _getInput
+    call _convertLengthToString
+    call _displayLength
+
     mov rax, 1
     mov rdi, 1
     mov rsi, prompt
