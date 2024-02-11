@@ -34,3 +34,5 @@ _displayPrompt:
     mov rdi, 1
     mov rsi, prompt
     mov rdx, promptLen
+    syscall
+    ret
