@@ -20,12 +20,6 @@ _start:
     call _convertLengthToString
     call _displayLength
 
-    mov rax, 1
-    mov rdi, 1
-    mov rsi, prompt
-    mov rdx, prompt_len
-    syscall
-
     mov rax, 0
     mov rdi, 0
     mov rsi, input
@@ -34,4 +28,11 @@ _start:
 
     mov rax, 60
     mov rdi, 0
+    syscall
+
+_displayPrompt:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, prompt
+    mov rdx, prompt_len
     syscall
