@@ -43,6 +43,9 @@ _getName:
     mov rsi, name
     mov rdx, nameLen
     syscall
+
+    dec rax 
+    mov byte [rsi + rax], 0
     ret
 
 _displayGreeting:
