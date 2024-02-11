@@ -45,6 +45,10 @@ _getInput:
     mov rsi, input
     mov rdx, input_len
     syscall
+
+    mov rcx, rax
+    dec rcx
+    mov byte [rsi + rcx], 0
     ret
 
 
