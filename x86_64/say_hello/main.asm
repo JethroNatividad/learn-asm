@@ -36,3 +36,11 @@ _displayPrompt:
     mov rdx, promptLen
     syscall
     ret
+
+_getName:
+    mov rax, 0
+    mov rdi, 0
+    mov rsi, name
+    mov rdx, nameLen
+    syscall
+    ret
