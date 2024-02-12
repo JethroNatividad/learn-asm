@@ -20,12 +20,11 @@ start:
     
     MOV AH, 01H
     INT 21H
+    SUB AL, "0"
     MOV input, AL
 
     ; factorial the input
     
-    ; product
-    ; multiplier
     MOV AX, 00H
     MOV AL, input
     MOV BL, AL
