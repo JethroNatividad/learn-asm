@@ -3,7 +3,7 @@
 
 .data
 message db "Enter Input: $"
-input db ?, "$"
+input db ?
 factorial db ?
 
 .code
