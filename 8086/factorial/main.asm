@@ -2,7 +2,8 @@
 .stack
 
 .data
-message db "Enter Input: $"
+message_input db "Enter Input: $"
+message_output db 10, 13, "Result: $"
 input db ?
 factorial dd ?
 factorialStr db 16 dup(0) ; Buffer to store the string representation of the number
@@ -16,7 +17,7 @@ start:
     INT 10H
     
     MOV AH, 09H ; Show message
-    MOV DX, offset message
+    MOV DX, offset message_input
     INT 21H
     
     MOV AH, 01H ; Get input
@@ -65,6 +66,11 @@ to_string_build:
     MOV [SI], "$"
                 
     ; Print the factorial
+
+    MOV AH, 09H
+    MOV DX, offset message_output
+    INT 21H
+
     MOV AH, 09H
     MOV DX, offset factorialStr
     INT 21H
