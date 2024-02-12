@@ -1,15 +1,18 @@
 section .data
-    input db 11
+    prompt db "Enter a number for factorial: "
+    prompt_len equ $ - prompt
 
 section .bss
     output resb 8
     reverse resb 8
+    input resb 8
 
 section .text
     global _start
 
 _start:
-    mov rax, [input]
+    call _printPrompt
+    call _getInput
     call _factorial
     call _convertToString
     call _printFactorial
@@ -19,10 +22,26 @@ _start:
     mov rdi, 0
     syscall
 
+_getInput:
+    mov rax, 0
+    mov rax, 0
+    mov rsi, input
+    mov rdx, 8
+    syscall
+    ret
+
+_printPrompt:
+    mov rax, 1
+    mov rdi, 1
+    mov rsi, prompt
+    mov rdx, prompt_len
+    syscall
+    ret
+
 ; input: value from rax
 ; output: factorial to rax
 _factorial:
-    mov rcx, rax ; lower value
+    mov rcx, input ; lower value
 _factorialLoop:
     dec rcx
     mul rcx
@@ -67,15 +86,6 @@ _reverseStringLoop:
 _reverseStringEnd:
     ret
     
-
-    ; length: 3
-    ; 0 2 1
-    ; [rsi + 2] [rsi + 1 ] [rsi + 0] 
-    ; 1 2 0
-
-
-
-
 _printFactorial:
     mov rax, 1
     mov rdi, 1
