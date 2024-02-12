@@ -66,9 +66,7 @@ _convertToStringLoop:
     inc rcx
     cmp rax, 0
     jne _convertToStringLoop
-
-; inputs: rax as input, rdi as length
-; ouputs: reverse string
+    mov byte [rsi + rcx], 0 ; null-terminate the string
     mov rdi, rcx
 _reverseString:
     mov rax, rsi
