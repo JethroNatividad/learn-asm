@@ -44,4 +44,28 @@ factorial_loop:
     
     MOV AH, 4CH
     INT 21H
+
+to_string:
+    MOV AX, factorial ; number to convert  
+    MOV CX, 0 ; counter
+    MOV BX, 10; divisor
+to_string_divide:
+    
+    XOR DX, DX ; Clear DX before division, DX stores the remainder
+    DIV BX; Divide AX to BX
+    PUSH DX ;Push remainder to stack
+    INC CX ; Increment counter
+    CMP AX, 0; Check If result is 0
+    JG to_string_divide
+    
+    lea si, factorialStr
+to_string_build:
+    POP AX; get the first digit from stack
+    ADD AL, "0"
+    
+    MOV [SI], AL
+    INC SI
+    LOOP to_string_build
+    INC SI
+    MOV [SI], "$"
 end start
