@@ -24,7 +24,7 @@ _start:
 
 _getInput:
     mov rax, 0
-    mov rax, 0
+    mov rdi, 0
     mov rsi, input
     mov rdx, 8
     syscall
@@ -41,7 +41,8 @@ _printPrompt:
 ; input: value from rax
 ; output: factorial to rax
 _factorial:
-    mov rcx, input ; lower value
+    mov rax, [input]
+    mov rcx, rax ; lower value
 _factorialLoop:
     dec rcx
     mul rcx
