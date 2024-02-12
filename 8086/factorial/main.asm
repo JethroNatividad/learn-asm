@@ -4,6 +4,7 @@
 .data
 message db "Enter Input: $"
 input db ?, "$"
+factorial db ?
 
 .code
 start:
@@ -20,6 +21,22 @@ start:
     MOV AH, 01H
     INT 21H
     MOV input, AL
+
+    ; factorial the input
+    
+    ; product
+    ; multiplier
+    MOV AX, 00H
+    MOV AL, input
+    MOV BL, AL
+    
+factorial_loop:
+    DEC BL
+    MUL BL
+    
+    CMP BL, 1
+    JG factorial_loop
+    MOV factorial, AX
     
     MOV AH, 09H
     MOV DX, offset input
