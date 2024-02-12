@@ -4,7 +4,8 @@
 .data
 message db "Enter Input: $"
 input db ?
-factorial db ?
+factorial dd ?
+factorialStr db 16 dup(0) ; Buffer to store the string representation of the number
 
 .code
 start:
@@ -14,17 +15,19 @@ start:
     MOV AH, 00H ; Show Screen
     INT 10H
     
-    MOV AH, 09H
+    MOV AH, 09H ; Show message
     MOV DX, offset message
     INT 21H
     
-    MOV AH, 01H
+    MOV AH, 01H ; Get input
     INT 21H
     SUB AL, "0"
     MOV input, AL
-
+    
     ; factorial the input
     
+    ; product
+    ; multiplier
     MOV AX, 00H
     MOV AL, input
     MOV BL, AL
@@ -37,13 +40,6 @@ factorial_loop:
     JG factorial_loop
     MOV factorial, AX
     
-    MOV AH, 09H
-    MOV DX, offset input
-    INT 21H
-    
-    MOV AH, 4CH
-    INT 21H
-
 to_string:
     MOV AX, factorial ; number to convert  
     MOV CX, 0 ; counter
@@ -67,4 +63,13 @@ to_string_build:
     LOOP to_string_build
     INC SI
     MOV [SI], "$"
+                
+    ; Print the factorial
+    MOV AH, 09H
+    MOV DX, offset factorialStr
+    INT 21H
+       
+    
+    MOV AH, 4CH
+    INT 21H
 end start
