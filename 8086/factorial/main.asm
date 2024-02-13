@@ -6,67 +6,67 @@ message_input db "Enter Input: $"
 message_output db 10, 13, "Result: $"
 input db ?
 factorial dd ?
-factorialStr db 16 dup(0) ; Buffer to store the string representation of the number
+factorialStr db 16 dup(0) ; Buffer
 
 .code
 start:
     MOV AX, @data
     MOV DS, AX
     
-    MOV AH, 00H ; Show Screen
+    ; Show Screen
+    MOV AH, 00H 
     INT 10H
     
-    MOV AH, 09H ; Show message
+    ; Show message input
+    MOV AH, 09H 
     MOV DX, offset message_input
     INT 21H
     
-    MOV AH, 01H ; Get input
+    ; Get input
+    MOV AH, 01H
     INT 21H
-    SUB AL, "0"
+    SUB AL, "0" ; Convert ASCII input to decimal
     MOV input, AL
-    
-    ; factorial the input
-    
-    ; product
-    ; multiplier
-    MOV AX, 00H
+
+factorial:
+    MOV AX, 00H ; Reset AX
     MOV AL, input
-    MOV BL, AL
+    MOV BL, AL ; multiplier
     
 factorial_loop:
     DEC BL
-    MUL BL
+    MUL BL ; AL * BL
     
     CMP BL, 1
-    JG factorial_loop
+    JG factorial_loop ; loop until multiplier > 1
     MOV factorial, AX
     
 to_string:
-    MOV AX, factorial ; number to convert  
+    MOV AX, factorial
     MOV CX, 0 ; counter
-    MOV BX, 10; divisor
+    MOV BX, 10 ; divisor
 to_string_divide:
-    
-    XOR DX, DX ; Clear DX before division, DX stores the remainder
-    DIV BX; Divide AX to BX
-    PUSH DX ;Push remainder to stack
+    MOV DX, 00H ; Clear DX before division, DX stores the remainder
+    DIV BX ; Divide AX to BX
+    PUSH DX ; Push remainder to stack
     INC CX ; Increment counter
-    CMP AX, 0; Check If result is 0
-    JG to_string_divide
+    CMP AX, 0 
+    JG to_string_divide ; Divide until Result is 0
     
-    lea si, factorialStr
+    LEA SI, factorialStr ; factorialStr buffer address
+
 to_string_build:
     POP AX; get the first digit from stack
-    ADD AL, "0"
+    ADD AL, "0" ; Convert to ASCII
     
-    MOV [SI], AL
-    INC SI
-    LOOP to_string_build
-    INC SI
-    MOV [SI], "$"
-                
-    ; Print the factorial
+    MOV [SI], AL ; Store ASCII of number to SI (factorialStr)
+    INC SI ; Move to the next value of SI
+    LOOP to_string_build ; Loop until CX becomes 0, Counter from the number of digits
 
+    INC SI
+    MOV [SI], "$" ; Add stopper to the end of SI (factorialStr)
+
+    ; Outputs the factorial
     MOV AH, 09H
     MOV DX, offset message_output
     INT 21H
@@ -75,7 +75,7 @@ to_string_build:
     MOV DX, offset factorialStr
     INT 21H
        
-    
+    ; END
     MOV AH, 4CH
     INT 21H
 end start
