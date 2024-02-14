@@ -56,7 +56,7 @@ input_size_to_string_loop:
     ; push remainder to stack
     XOR DX, DX ; clear dx, dx stores remainder
     DIV BL
-    PUSH DL
+    PUSH DX
     INC CX
     CMP AL, 0
     JNE input_size_to_string_loop
@@ -65,7 +65,7 @@ input_size_to_string_loop:
 input_size_to_string_loop2:
     ; pop stack one by one, add "0"
     ; append to string input size
-    POP AL
+    POP AX
     ADD AL, "0"
 
     MOV [SI], AL
