@@ -13,7 +13,7 @@ max_input_size db 100
 input_size db ?
 input_buffer db max_input_size dup(?)
 
-input_size_str db 3 dup("0") ; 3 as max input size only 100
+input_size_str db 3 dup(?) ; 3 as max input size only 100
 
 .code
 start:
@@ -48,17 +48,18 @@ get_input:
     RET
 
 input_size_to_string:
-    MOV AL, input_size
+    XOR AX, AX
     XOR CX, CX
-    MOV BL, 10 ; to divide
+    MOV AL, input_size
+    MOV BX, 10 ; to divide
 input_size_to_string_loop:
     ; divide by 10 until 0
     ; push remainder to stack
     XOR DX, DX ; clear dx, dx stores remainder
-    DIV BL
+    DIV BX
     PUSH DX
     INC CX
-    CMP AL, 0
+    CMP AX, 0
     JNE input_size_to_string_loop
 
     LEA SI, input_size_str
@@ -73,7 +74,6 @@ input_size_to_string_loop2:
     LOOP input_size_to_string_loop2
 
     ; add $ to the end
-    INC SI
     MOV [SI], "$"
 
     RET
