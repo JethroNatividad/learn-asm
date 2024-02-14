@@ -13,6 +13,8 @@ max_input_size db 100
 input_size db ?
 input_buffer db max_input_size dup(?)
 
+input_size_str db 3 dup("0") ; 3 as max input size only 100
+
 .code
 start:
     MOV AX, @data
