@@ -8,14 +8,15 @@ input db ?
 factorial dd ?
 factorialStr db 16 dup(0) ; Buffer
 
+max_input_size db 5
+input_size db ?
+input_buffer db max_input_size dup(?)
+
+
 .code
 start:
     MOV AX, @data
     MOV DS, AX
-    
-    ; Show Screen
-    MOV AH, 00H 
-    INT 10H
     
     ; Show message input
     MOV AH, 09H 
@@ -23,8 +24,17 @@ start:
     INT 21H
     
     ; Get input
-    MOV AH, 01H
+    MOV AH, 0AH
+    MOV DX, max_input_size
     INT 21H
+
+    XOR CX, CX
+    MOV CL, input_size
+    LEA SI, input_buffer
+    ADD SI, CX
+    MOV [SI], 0
+
+
     SUB AL, "0" ; Convert ASCII input to decimal
     MOV input, AL
 
