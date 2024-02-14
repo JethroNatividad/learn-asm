@@ -2,7 +2,9 @@
 .stack
 
 .data
-message db "What is your name? $"
+question db "What is your name? $"
+message db 13, 10, "Hello $"
+message2 db "How are you?", 13, 10, "$"
 
 max_input_size db 100
 actual_input_size db ?
@@ -17,7 +19,7 @@ start:
     INT 10H
 
     MOV AH, 09H
-    MOV DX, offset message
+    MOV DX, offset question
     INT 21H
 
     LEA DX, max_input_size
@@ -30,7 +32,15 @@ start:
     MOV [SI], AL
 
     MOV AH, 09H
+    MOV DX, offset message
+    INT 21H
+
+    MOV AH, 09H
     MOV DX, offset input
+    INT 21H
+
+    MOV AH, 09H
+    MOV DX, offset message2
     INT 21H
 
     MOV AH, 4CH
