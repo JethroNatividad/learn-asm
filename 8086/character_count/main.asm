@@ -24,7 +24,10 @@ start:
 end start
 
 show_prompt:
-
+    MOV AH, 09H
+    MOV DX, offset prompt_message
+    INT 21H
+    RET
 end show_prompt
 
 get_input:
