@@ -9,6 +9,10 @@
 .data
 prompt_message db "What is the input string? $"
 
+max_input_size db 100
+input_size db ?
+input_buffer db max_input_size dup(?)
+
 .code
 start:
     MOV AX, @data
