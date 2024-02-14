@@ -22,3 +22,19 @@ start:
     INT 21H
 end start
 
+show_prompt:
+
+end show_prompt
+
+get_input:
+
+end get_input
+
+to_string:
+
+end to_string
+
+show_output:
+
+end show_output
+
