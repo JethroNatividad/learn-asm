@@ -1,3 +1,5 @@
+; Write a program that takes a quote, and an author. and outputs it.
+
 .model small
 .stack
 
