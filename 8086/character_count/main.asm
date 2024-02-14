@@ -46,6 +46,11 @@ get_input:
     RET
 
 input_size_to_string:
+    ; divide by 10 until 0
+    ; push remainder to stack
+
+    ; pop stack one by one, add "0"
+    ; append to string input size
     RET
 
 show_output:
