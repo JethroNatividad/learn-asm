@@ -15,9 +15,6 @@ start:
     MOV AX, @data
     MOV DS, AX
 
-    MOV AH, 00H
-    INT 10H
-
     MOV AH, 09H
     MOV DX, offset question
     INT 21H
@@ -48,3 +45,4 @@ start:
     MOV AH, 4CH
     INT 21H
 end start
+
