@@ -20,7 +20,7 @@ start:
 
     CALL show_prompt
     CALL get_input
-    CALL to_string
+    CALL input_size_to_string
     CALL show_output
 
     MOV AH, 4CH
@@ -34,7 +34,7 @@ show_prompt:
 
 get_input:
     MOV AH, 0AH
-    MOV DX, max_input_size
+    MOV DX, offset max_input_size
     INT 21H
 
     ; Add $ to end of input
@@ -45,7 +45,7 @@ get_input:
     MOV [SI], "$"
     RET
 
-to_string:
+input_size_to_string:
     RET
 
 show_output:
