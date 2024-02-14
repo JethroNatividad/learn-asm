@@ -4,7 +4,7 @@
 .data
 question db "What is your name? $"
 message db 13, 10, "Hello $"
-message2 db "How are you?", 13, 10, "$"
+message2 db ", how are you?", 13, 10, "$"
 
 max_input_size db 100
 input_size db ?
@@ -26,7 +26,6 @@ start:
     MOV DX, offset max_input_size
     INT 21H
 
-    MOV BL, AL
     MOV AL, "$"
     XOR CX, CX
     MOV CL, input_size
