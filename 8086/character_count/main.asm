@@ -36,6 +36,13 @@ get_input:
     MOV AH, 0AH
     MOV DX, max_input_size
     INT 21H
+
+    ; Add $ to end of input
+    LEA SI, input_buffer
+    XOR CX, CX
+    MOV CL, input_size
+    ADD SI, CX
+    MOV [SI], "$"
     RET
 
 to_string:
