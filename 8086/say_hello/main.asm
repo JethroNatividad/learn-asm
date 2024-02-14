@@ -7,8 +7,8 @@ message db 13, 10, "Hello $"
 message2 db "How are you?", 13, 10, "$"
 
 max_input_size db 100
-actual_input_size db ?
-input db 100 dup(0) ; buffer
+input_size db ?
+input_buffer db max_input_size dup(?) ; buffer
 
 .code
 start:
@@ -22,13 +22,16 @@ start:
     MOV DX, offset question
     INT 21H
 
-    LEA DX, max_input_size
     MOV AH, 0AH
+    MOV DX, offset max_input_size
     INT 21H
 
+    MOV BL, AL
     MOV AL, "$"
-    MOV SI, offset input
-    ADD SI, offset actual_input_size
+    XOR CX, CX
+    MOV CL, input_size
+    LEA SI, input_buffer
+    ADD SI, CX
     MOV [SI], AL
 
     MOV AH, 09H
@@ -36,7 +39,7 @@ start:
     INT 21H
 
     MOV AH, 09H
-    MOV DX, offset input
+    MOV DX, offset input_buffer
     INT 21H
 
     MOV AH, 09H
