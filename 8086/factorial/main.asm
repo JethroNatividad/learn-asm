@@ -32,10 +32,9 @@ factorial:
     MOV AX, 00H ; Reset AX
     MOV AL, input
     MOV BL, AL ; multiplier
-    
 factorial_loop:
     DEC BL
-    MUL BL ; AL * BL
+    MUL BX ; AL * BL
     
     CMP BL, 1
     JG factorial_loop ; loop until multiplier > 1
