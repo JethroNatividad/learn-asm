@@ -15,6 +15,10 @@ input_buffer db max_input_size dup(?)
 
 input_size_str db 3 dup(?) ; 3 as max input size only 100
 
+output_message 10, 13, "$"
+output_message1 db " has $"
+output_message2 db "  character/s. ", 10, 13 "$"
+
 .code
 start:
     MOV AX, @data
@@ -79,6 +83,26 @@ input_size_to_string_loop2:
     RET
 
 show_output:
+    MOV AH, 09H
+    MOV DX, offset output_message
+    INT 21H
+
+    MOV AH, 09H
+    MOV DX, offset input_buffer
+    INT 21H
+
+    MOV AH, 09H
+    MOV DX, offset output_message1
+    INT 21H
+
+    MOV AH, 09H
+    MOV DX, offset input_size_str
+    INT 21H
+
+    MOV AH, 09H
+    MOV DX, offset output_message2
+    INT 21H
+
     RET
 
 end
