@@ -5,18 +5,17 @@
 message_input db "Enter Input: $"
 message_output db 10, 13, "Result: $"
 input db ?
-factorial dd ?
+factorialRes dd ?
 factorialStr db 16 dup(0) ; Buffer
-
-max_input_size db 5
-input_size db ?
-input_buffer db max_input_size dup(?)
-
 
 .code
 start:
     MOV AX, @data
     MOV DS, AX
+    
+    ; Show Screen
+    MOV AH, 00H 
+    INT 10H
     
     ; Show message input
     MOV AH, 09H 
@@ -24,17 +23,8 @@ start:
     INT 21H
     
     ; Get input
-    MOV AH, 0AH
-    MOV DX, max_input_size
+    MOV AH, 01H
     INT 21H
-
-    XOR CX, CX
-    MOV CL, input_size
-    LEA SI, input_buffer
-    ADD SI, CX
-    MOV [SI], 0
-
-
     SUB AL, "0" ; Convert ASCII input to decimal
     MOV input, AL
 
@@ -49,10 +39,10 @@ factorial_loop:
     
     CMP BL, 1
     JG factorial_loop ; loop until multiplier > 1
-    MOV factorial, AX
+    MOV factorialRes, AX
     
 to_string:
-    MOV AX, factorial
+    MOV AX, factorialRes
     MOV CX, 0 ; counter
     MOV BX, 10 ; divisor
 to_string_divide:
