@@ -7,6 +7,7 @@
 .stack
 
 .data
+prompt_message db "What is the input string? $"
 
 .code
 start:
