@@ -33,6 +33,9 @@ show_prompt:
     RET
 
 get_input:
+    MOV AH, 0AH
+    MOV DX, max_input_size
+    INT 21H
     RET
 
 to_string:
