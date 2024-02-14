@@ -21,24 +21,20 @@ start:
 
     MOV AH, 4CH
     INT 21H
-end start
 
 show_prompt:
     MOV AH, 09H
     MOV DX, offset prompt_message
     INT 21H
     RET
-end show_prompt
 
 get_input:
-
-end get_input
+    RET
 
 to_string:
-
-end to_string
+    RET
 
 show_output:
+    RET
 
-end show_output
-
+end
