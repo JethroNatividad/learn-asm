@@ -48,11 +48,34 @@ get_input:
     RET
 
 input_size_to_string:
+    MOV AL, input_size
+    XOR CX, CX
+    MOV BL, 10 ; to divide
+input_size_to_string_loop:
     ; divide by 10 until 0
     ; push remainder to stack
+    XOR DX, DX ; clear dx, dx stores remainder
+    DIV BL
+    PUSH DL
+    INC CX
+    CMP AL, 0
+    JNE input_size_to_string_loop
 
+    LEA SI, input_size_str
+input_size_to_string_loop2:
     ; pop stack one by one, add "0"
     ; append to string input size
+    POP AL
+    ADD AL, "0"
+
+    MOV [SI], AL
+    INC SI
+    LOOP input_size_to_string_loop2
+
+    ; add $ to the end
+    INC SI
+    MOV [SI], "$"
+
     RET
 
 show_output:
