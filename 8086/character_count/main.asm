@@ -15,7 +15,7 @@ input_buffer db max_input_size dup(?)
 
 input_size_str db 3 dup(?) ; 3 as max input size only 100
 
-output_message 10, 13, "$"
+output_message db 10, 13, "$"
 output_message1 db " has $"
 output_message2 db "  character/s. ", 10, 13, "$"
 
