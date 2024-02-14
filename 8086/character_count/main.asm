@@ -1,4 +1,8 @@
 ; Problem: program that counts the number of characters of an input
+; input: something
+; process: count the length
+; output: the length
+
 .model small
 .stack
 
