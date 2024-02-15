@@ -36,8 +36,15 @@ show_quote_prompt:
 
 get_quote_input:
     MOV AH, 0AH
-    MOV DX, max_quote_size
+    MOV DX, offset max_quote_size
     INT 21H
+
+    ; Change last character to $
+    XOR AX, AX
+    LEA SI, quote_buffer
+    MOV AL, quote_size
+    ADD SI, AX
+    MOV [SI], "$"
     RET
 
 show_author_prompt:
