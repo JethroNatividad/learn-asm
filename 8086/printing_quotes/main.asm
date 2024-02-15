@@ -10,6 +10,10 @@
 quote_prompt db "Enter a quote: $"
 author_prompt db 10, 13, "Who is the author? $"
 
+output db 10, 13, "$"
+output1 db " says, ", 34, " $"
+output2 db 34, 10, 13, "$"
+
 
 max_quote_size db 100
 quote_size db ?
@@ -70,8 +74,23 @@ get_author_input:
     ADD SI, AX
     MOV [SI], "$"
     RET
-    
+
 show_output:
+    MOV AH, 09H
+    MOV DX, offset output
+    INT 21H
+
+    MOV DX, offset author_buffer
+    INT 21H
+
+    MOV DX, offset output1
+    INT 21H
+
+    MOV DX, offset quote_buffer
+    INT 21H
+
+    MOV DX, offset output2
+    INT 21H
     RET
 
 end
