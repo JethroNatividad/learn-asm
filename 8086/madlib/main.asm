@@ -4,27 +4,31 @@
 .stack
 
 .data
+noun_prompt db "Enter a noun: $"
+verb_prompt db "Enter a verb: $"
+adverb_prompt db "Enter an adverb: $"
+adjective_prompt db "Enter an adjective: $"
 
 .code
 start:
     MOV AX, @data
     MOV DS, AX
 
-    CALL show_prompt_noun
+    CALL show_noun_prompt
     CALL get_noun
 
-    CALL show_prompt_verb
+    CALL show_verb_prompt
     CALL get_verb
 
-    CALL show_prompt_adverb
+    CALL show_adverb_prompt
     CALL get_adverb
 
-    CALL show_prompt_adjective
+    CALL show_adjective_prompt
     CALL get_adjective
 
     CALL show_output
 
-
     MOV AH, 4CH
     INT 21H
+
 end
