@@ -20,13 +20,13 @@ start:
     CALL get_author_input
     CALL show_output
 
-    MOV AX, 4CH
+    MOV AH, 4CH
     INT 21H
 
 
 show_quote_prompt:
-    MOV AX, 09H
-    MOV DX, quote_prompt
+    MOV AH, 09H
+    MOV DX, offset quote_prompt
     INT 21H
     RET
 
