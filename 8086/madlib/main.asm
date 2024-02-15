@@ -75,5 +75,10 @@ get_verb:
     ADD SI, AX
     MOV [SI], "$"
     RET
-
+show_adverb_prompt:
+    MOV AH, 09H
+    MOV DX, adverb_prompt
+    INT 21H
+    RET
+    
 end
