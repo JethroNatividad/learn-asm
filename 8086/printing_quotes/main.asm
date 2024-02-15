@@ -15,6 +15,10 @@ max_quote_size db 100
 quote_size db ?
 quote_buffer db max_quote_size dup(?)
 
+max_author_size db 100
+author_size db ?
+author_buffer db max_author_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -56,7 +60,17 @@ show_author_prompt:
     RET
 
 get_author_input:
+    MOV AH, 0AH
+    MOV DX, offset max_author_size
+    INT 21H
+    ; Change last character to $
+    XOR AX, AX
+    LEA SI, author_buffer
+    MOV AL, author_size
+    ADD SI, AX
+    MOV [SI], "$"
     RET
+    
 show_output:
     RET
 
