@@ -13,6 +13,11 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    CALL show_quote_prompt
+    CALL get_quote_input
+    CALL show_author_prompt
+    CALL get_author_input
+    CALL show_output
 
     MOV AX, 4CH
     INT 21H
