@@ -30,16 +30,20 @@ start:
     MOV AX, @data
     MOV DS, AX
 
-    CALL show_noun_prompt
+    MOV DX, offset noun_prompt
+    CALL print
     CALL get_noun
 
-    CALL show_verb_prompt
+    MOV DX, offset verb_prompt
+    CALL print
     CALL get_verb
 
-    CALL show_adverb_prompt
+    MOV DX, offset adverb_prompt
+    CALL print
     CALL get_adverb
 
-    CALL show_adjective_prompt
+    MOV DX, offset adjective_prompt
+    CALL print
     CALL get_adjective
 
     ; CALL show_output
@@ -52,12 +56,6 @@ start:
 print:
     MOV AH, 09H
     INT 21H
-
-show_noun_prompt:
-    MOV AH, 09H
-    MOV DX, offset noun_prompt
-    INT 21H
-    RET
 
 get_noun:
     MOV AH, 0AH
@@ -72,12 +70,6 @@ get_noun:
     MOV [SI], "$"
     RET
 
-show_verb_prompt:
-    MOV AH, 09H
-    MOV DX, offset verb_prompt
-    INT 21H
-    RET
-
 get_verb:
     MOV AH, 0AH
     MOV DX, offset max_input_verb_size
@@ -90,12 +82,6 @@ get_verb:
     MOV [SI], "$"
     RET
 
-show_adverb_prompt:
-    MOV AH, 09H
-    MOV DX, offset adverb_prompt
-    INT 21H
-    RET
-
 get_adverb:
     MOV AH, 0AH
     MOV DX, offset max_input_adverb_size
@@ -106,12 +92,6 @@ get_adverb:
     MOV AL, input_adverb_size
     ADD SI, AX
     MOV [SI], "$"
-    RET
-
-show_adjective_prompt:
-    MOV AH, 09H
-    MOV DX, offset adjective_prompt
-    INT 21H
     RET
 
 get_adjective:
