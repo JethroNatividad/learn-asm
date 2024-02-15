@@ -40,4 +40,13 @@ start:
 
     MOV AH, 4CH
     INT 21H
+
+get_number:
+    ; get input
+
+    ; converting to number
+    ; store num, 0
+    ; from first char
+    ; num = (num * 10) + char - "0"
+
 end
