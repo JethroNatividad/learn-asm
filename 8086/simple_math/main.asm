@@ -1,3 +1,5 @@
+; Write a program that takes two numbers, and outputs the addition, subtraction, multiplication, and division.
+
 .model small
 
 .stack
