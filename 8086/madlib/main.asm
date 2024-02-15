@@ -25,6 +25,12 @@ max_input_adjective_size db 100
 input_adjective_size db ?
 input_adjective_buffer db max_input_adjective_size dup(?)
 
+start_output db 10, 13, "Do you $"
+post_verb db " your $"
+end_output db " ? That's hilarious!", 10, 13, "$"
+space db " $"
+
+
 .code
 start:
     MOV AX, @data
@@ -50,7 +56,8 @@ start:
     MOV DX, offset max_input_adjective_size
     CALL get_input
 
-    ; CALL show_output
+    CALL show_output
+
     MOV AH, 4CH
     INT 21H
 
@@ -76,4 +83,32 @@ get_input:
     MOV [SI], "$"
     RET
 
+show_output:
+    MOV DX, offset start_output
+    CALL print
+
+    MOV DX, offset input_verb_buffer
+    CALL print
+
+    MOV DX, offset post_verb
+    CALL print
+
+    MOV DX, offset input_adjective_buffer
+    CALL print
+
+    MOV DX, offset space
+    CALL print
+
+    MOV DX, offset input_noun_buffer
+    CALL print
+
+    MOV DX, offset space
+    CALL print
+
+    MOV DX, offset input_adverb_buffer
+    CALL print
+
+    MOV DX, offset end_output
+    CALL print
+    RET
 end
