@@ -32,24 +32,25 @@ start:
 
     MOV DX, offset noun_prompt
     CALL print
-
     MOV DX, offset max_input_noun_size
     CALL get_input
 
     MOV DX, offset verb_prompt
     CALL print
-    CALL get_verb
+    MOV DX, max_input_verb_size
+    CALL get_input
 
     MOV DX, offset adverb_prompt
     CALL print
-    CALL get_adverb
+    MOV DX, max_input_adverb_size
+    CALL get_input
 
     MOV DX, offset adjective_prompt
     CALL print
-    CALL get_adjective
+    MOV DX, max_input_adjective_size
+    CALL get_input
 
     ; CALL show_output
-
     MOV AH, 4CH
     INT 21H
 
@@ -60,7 +61,7 @@ print:
     INT 21H
     RET
 
-; input: max input size in DX, LEA buffer in SI, input size in BL
+; input: max input size in DX
 get_input:
     MOV AH, 0AH
     INT 21H
@@ -72,55 +73,6 @@ get_input:
     MOV BL, [SI] ; input size
     INC SI
     ADD SI, BX ; buffer location
-    MOV [SI], "$"
-    RET
-
-get_noun:
-    MOV AH, 0AH
-    MOV DX, offset max_input_noun_size
-    INT 21H
-
-    ; ADD $ to end
-    XOR AX, AX
-    LEA SI, input_noun_buffer
-    MOV AL, input_noun_size
-    ADD SI, AX
-    MOV [SI], "$"
-    RET
-
-get_verb:
-    MOV AH, 0AH
-    MOV DX, offset max_input_verb_size
-    INT 21H
-
-    XOR AX, AX
-    LEA SI, input_verb_buffer
-    MOV AL, input_verb_size
-    ADD SI, AX
-    MOV [SI], "$"
-    RET
-
-get_adverb:
-    MOV AH, 0AH
-    MOV DX, offset max_input_adverb_size
-    INT 21H
-
-    XOR AX, AX
-    LEA SI, input_adverb_buffer
-    MOV AL, input_adverb_size
-    ADD SI, AX
-    MOV [SI], "$"
-    RET
-
-get_adjective:
-    MOV AH, 0AH
-    MOV DX, offset max_input_adjective_size
-    INT 21H
-
-    XOR AX, AX
-    LEA SI, input_adjective_buffer
-    MOV AL, input_adjective_size
-    ADD SI, AX
     MOV [SI], "$"
     RET
 
