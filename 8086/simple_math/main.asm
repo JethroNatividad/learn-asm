@@ -20,6 +20,24 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    ; get first number
+    ; convert to int
+
+    ; get second number
+    ; convert to int
+
+    ; calculate addition
+    ; convert result to str
+
+    ; calculate subtraction
+    ; convert result to str
+
+    ; calculate multiplication
+    ; convert result to str
+
+    ; calculate division
+    ; convert result to str
+
     MOV AH, 4CH
     INT 21H
 end
