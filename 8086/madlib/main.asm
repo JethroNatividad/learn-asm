@@ -51,10 +51,10 @@ get_noun:
     INT 21H
 
     ; ADD $ to end
-    XOR BX, BX
+    XOR AX, AX
     LEA SI, input_noun_buffer
-    MOV BL, input_noun_size
-    ADD SI, BX
+    MOV AL, input_noun_size
+    ADD SI, AX
     MOV [SI], "$""
     RET
 
