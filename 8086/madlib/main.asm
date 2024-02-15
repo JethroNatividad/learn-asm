@@ -60,13 +60,13 @@ get_noun:
 
 show_verb_prompt:
     MOV AH, 09H
-    MOV DX, verb_prompt
+    MOV DX, offset verb_prompt
     INT 21H
     RET
 
 get_verb:
     MOV AH, 0AH
-    MOV DX, max_input_verb_size
+    MOV DX, offset max_input_verb_size
     INT 21H
 
     XOR AX, AX
