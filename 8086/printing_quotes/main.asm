@@ -11,7 +11,7 @@ quote_prompt db "Enter a quote: $"
 author_prompt db 10, 13, "Who is the author? $"
 
 output db 10, 13, "$"
-output1 db " says, ", 34, " $"
+output1 db " says, ", 34, "$"
 output2 db 34, 10, 13, "$"
 
 max_quote_size db 100
