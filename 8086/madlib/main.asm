@@ -17,6 +17,10 @@ max_input_verb_size db 100
 input_verb_size db ?
 input_verb_buffer db max_input_verb_size dup(?)
 
+max_input_adverb_size db 100
+input_adverb_size db ?
+input_adverb_buffer db max_input_adverb_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -80,5 +84,17 @@ show_adverb_prompt:
     MOV DX, adverb_prompt
     INT 21H
     RET
-    
+
+get_adverb:
+    MOV AH, 09H
+    MOV DX, max_input_adverb_size
+    INT 21H
+
+    XOR AX, AX
+    LEA SI, input_adverb_buffer
+    MOV AL, input_adverb_size
+    ADD SI, AL
+    MOV [SI], "$"
+    RET
+
 end
