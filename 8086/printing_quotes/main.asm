@@ -8,6 +8,8 @@
 
 .data
 quote_prompt db "Enter a quote: $"
+author_prompt db "Who is the author? $"
+
 
 max_quote_size db 100
 quote_size db ?
@@ -48,6 +50,9 @@ get_quote_input:
     RET
 
 show_author_prompt:
+    MOV AH, 09H
+    MOV DX, offset author_prompt
+    INT 21H
     RET
 get_author_input:
     RET
