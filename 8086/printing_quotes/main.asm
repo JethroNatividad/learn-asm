@@ -9,6 +9,10 @@
 .data
 quote_prompt db "Enter a quote: $"
 
+max_quote_size db 100
+quote_size db ?
+quote_buffer db max_quote_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -31,7 +35,11 @@ show_quote_prompt:
     RET
 
 get_quote_input:
+    MOV AH, 0AH
+    MOV DX, max_quote_size
+    INT 21H
     RET
+
 show_author_prompt:
     RET
 get_author_input:
