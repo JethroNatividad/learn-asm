@@ -14,7 +14,6 @@ output db 10, 13, "$"
 output1 db " says, ", 34, " $"
 output2 db 34, 10, 13, "$"
 
-
 max_quote_size db 100
 quote_size db ?
 quote_buffer db max_quote_size dup(?)
