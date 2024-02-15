@@ -6,8 +6,8 @@
 .data
 noun_prompt db "Enter a noun: $"
 verb_prompt db 10, 13, "Enter a verb: $"
-adverb_prompt db 10, 13, "Enter an adverb: $"
-adjective_prompt db 10, 13, "Enter an adjective: $"
+adverb_prompt db 10, 13, "Enter an adverb (describes a verb): $"
+adjective_prompt db 10, 13, "Enter an adjective (describes a noun): $"
 
 max_input_noun_size db 100
 input_noun_size db ?
@@ -41,6 +41,11 @@ start:
     MOV DX, offset max_input_noun_size
     CALL get_input
 
+    MOV DX, offset adjective_prompt
+    CALL print
+    MOV DX, offset max_input_adjective_size
+    CALL get_input
+
     MOV DX, offset verb_prompt
     CALL print
     MOV DX, offset max_input_verb_size
@@ -51,10 +56,6 @@ start:
     MOV DX, offset max_input_adverb_size
     CALL get_input
 
-    MOV DX, offset adjective_prompt
-    CALL print
-    MOV DX, offset max_input_adjective_size
-    CALL get_input
 
     CALL show_output
 
