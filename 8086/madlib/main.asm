@@ -13,6 +13,10 @@ max_input_noun_size db 100
 input_noun_size db ?
 input_noun_buffer db max_input_noun_size dup(?)
 
+max_input_verb_size db 100
+input_verb_size db ?
+input_verb_buffer db max_input_verb_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -58,5 +62,18 @@ show_verb_prompt:
     MOV AH, 09H
     MOV DX, verb_prompt
     INT 21H
+    RET
+
+get_verb:
+    MOV AH, 0AH
+    MOV DX, max_input_verb_size
+    INT 21H
+
+    XOR AX, AX
+    LEA SI, input_verb_buffer
+    MOV AL, input_verb_size
+    ADD SI, AX
+    MOV [SI], "$"
+    RET
 
 end
