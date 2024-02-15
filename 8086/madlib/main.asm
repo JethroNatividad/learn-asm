@@ -32,7 +32,9 @@ start:
 
     MOV DX, offset noun_prompt
     CALL print
-    CALL get_noun
+
+    MOV DX, offset max_input_noun_size
+    CALL get_input
 
     MOV DX, offset verb_prompt
     CALL print
@@ -56,6 +58,21 @@ start:
 print:
     MOV AH, 09H
     INT 21H
+    RET
+
+; input: max input size in DX, LEA buffer in SI, input size in BL
+get_input:
+    MOV AH, 0AH
+    INT 21H
+
+    ; ADD $ to end
+    LEA SI, DX ; max input size address
+    INC SI 
+    XOR BX, BX
+    MOV BL, [SI] ; input size
+    INC SI
+    ADD SI, BX ; buffer location
+    MOV [SI], "$"
     RET
 
 get_noun:
