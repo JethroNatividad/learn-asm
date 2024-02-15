@@ -7,6 +7,7 @@
 .stack
 
 .data
+quote_prompt db "Enter a quote: $"
 
 .code
 start:
@@ -21,4 +22,12 @@ start:
 
     MOV AX, 4CH
     INT 21H
+
+
+show_quote_prompt:
+    MOV AX, 09H
+    MOV DX, quote_prompt
+    INT 21H
+    RET
+
 end
