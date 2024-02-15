@@ -30,4 +30,13 @@ show_quote_prompt:
     INT 21H
     RET
 
+get_quote_input:
+    RET
+show_author_prompt:
+    RET
+get_author_input:
+    RET
+show_output:
+    RET
+
 end
