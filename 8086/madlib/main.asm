@@ -9,6 +9,10 @@ verb_prompt db "Enter a verb: $"
 adverb_prompt db "Enter an adverb: $"
 adjective_prompt db "Enter an adjective: $"
 
+max_input_noun_size db 100
+input_noun_size db ?
+input_noun_buffer db max_input_noun_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -20,13 +24,13 @@ start:
     CALL show_verb_prompt
     CALL get_verb
 
-    CALL show_adverb_prompt
-    CALL get_adverb
+    ; CALL show_adverb_prompt
+    ; CALL get_adverb
 
-    CALL show_adjective_prompt
-    CALL get_adjective
+    ; CALL show_adjective_prompt
+    ; CALL get_adjective
 
-    CALL show_output
+    ; CALL show_output
 
     MOV AH, 4CH
     INT 21H
@@ -36,5 +40,23 @@ show_noun_prompt:
     MOV DX, offset noun_prompt
     INT 21H
     RET
+
+get_noun:
+    MOV AH, 0AH
+    MOV DX, offset max_input_noun_size
+    INT 21H
+
+    ; ADD $ to end
+    XOR BX, BX
+    LEA SI, input_noun_buffer
+    MOV BL, input_noun_size
+    ADD SI, BX
+    MOV [SI], "$""
+    RET
+
+show_verb_prompt:
+    MOV AH, 09H
+    MOV DX, verb_prompt
+    INT 21H
 
 end
