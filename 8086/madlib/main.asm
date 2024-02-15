@@ -27,7 +27,7 @@ input_adjective_buffer db max_input_adjective_size dup(?)
 
 start_output db 10, 13, "Do you $"
 post_verb db " your $"
-end_output db " ? That's hilarious!", 10, 13, "$"
+end_output db "? That's hilarious!", 10, 13, "$"
 space db " $"
 
 
