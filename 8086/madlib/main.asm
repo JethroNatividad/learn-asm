@@ -56,6 +56,7 @@ start:
 print:
     MOV AH, 09H
     INT 21H
+    RET
 
 get_noun:
     MOV AH, 0AH
