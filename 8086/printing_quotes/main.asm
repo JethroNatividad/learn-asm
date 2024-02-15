@@ -1,4 +1,7 @@
 ; Write a program that takes a quote, and an author. and outputs it.
+; Inputs: quote, author
+; Processes: surround "" the quote
+; Output: author says, "quote"
 
 .model small
 .stack
