@@ -21,6 +21,10 @@ max_input_adverb_size db 100
 input_adverb_size db ?
 input_adverb_buffer db max_input_adverb_size dup(?)
 
+max_input_adjective_size db 100
+input_adjective_size db ?
+input_adjective_buffer db max_input_adjective_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -35,8 +39,8 @@ start:
     CALL show_adverb_prompt
     CALL get_adverb
 
-    ; CALL show_adjective_prompt
-    ; CALL get_adjective
+    CALL show_adjective_prompt
+    CALL get_adjective
 
     ; CALL show_output
 
@@ -79,6 +83,7 @@ get_verb:
     ADD SI, AX
     MOV [SI], "$"
     RET
+
 show_adverb_prompt:
     MOV AH, 09H
     MOV DX, offset adverb_prompt
@@ -93,6 +98,24 @@ get_adverb:
     XOR AX, AX
     LEA SI, input_adverb_buffer
     MOV AL, input_adverb_size
+    ADD SI, AX
+    MOV [SI], "$"
+    RET
+
+show_adjective_prompt:
+    MOV AH, 09H
+    MOV DX, offset adjective_prompt
+    INT 21H
+    RET
+
+get_adjective:
+    MOV AH, 0AH
+    MOV DX, offset max_input_adjective_size
+    INT 21H
+
+    XOR AX, AX
+    LEA SI, input_adjective_buffer
+    MOV AL, input_adjective_size
     ADD SI, AX
     MOV [SI], "$"
     RET
