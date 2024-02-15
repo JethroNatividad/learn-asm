@@ -31,4 +31,10 @@ start:
     MOV AH, 4CH
     INT 21H
 
+show_noun_prompt:
+    MOV AH, 09H
+    MOV DX, offset noun_prompt
+    INT 21H
+    RET
+
 end
