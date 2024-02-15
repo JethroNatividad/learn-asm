@@ -37,17 +37,17 @@ start:
 
     MOV DX, offset verb_prompt
     CALL print
-    MOV DX, max_input_verb_size
+    MOV DX, offset max_input_verb_size
     CALL get_input
 
     MOV DX, offset adverb_prompt
     CALL print
-    MOV DX, max_input_adverb_size
+    MOV DX, offsetmax_input_adverb_size
     CALL get_input
 
     MOV DX, offset adjective_prompt
     CALL print
-    MOV DX, max_input_adjective_size
+    MOV DX, offset max_input_adjective_size
     CALL get_input
 
     ; CALL show_output
