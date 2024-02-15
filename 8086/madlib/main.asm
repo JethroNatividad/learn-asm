@@ -1,3 +1,5 @@
+; A program that prompts for a noun, a verb, an adverb, and an adjective and generates a statement on it.
+
 .model small
 .stack
 
