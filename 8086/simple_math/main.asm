@@ -20,7 +20,7 @@ num dd 0
 
 max_first_number_size db 5
 first_number_size db ?
-first_number_buffer db max_first_number_size
+first_number_buffer db max_first_number_size dup(?)
 first_number dd 0
 
 .code
@@ -28,7 +28,12 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    MOV DX, offset max_first_number_size
     CALL get_input
+
+    MOV DX, offset first_number_buffer
+    CALL to_num
+    MOV first_number, AX
 
     ; get first number
     ; convert to int
@@ -51,16 +56,29 @@ start:
     MOV AH, 4CH
     INT 21H
 
+; Inputs: DX
 get_input:
-    ; get input
+    MOV AH, 0AH
+    INT 21H
 
+    ; Add $ to end
+    LEA SI, DX
+    INC SI
+    MOV BL, [SI]
+    ADD SI, BX
+    INC SI
+    MOV [SI], "$"
+    RET
     ; converting to number
     ; store num, 0
     ; from first char
     ; num = (num * 10) + char - "0"
+
+; Inputs: DX
+; Outputs: AX
 to_num:
     XOR AX, AX
-    LEA SI, str_num
+    LEA SI, DX
 to_num_loop:
     XOR DX, DX
     MOV BL, 10
@@ -72,6 +90,5 @@ to_num_loop:
     INC SI
     CMP [SI], "$"
     JNE to_num_loop
-    MOV num, AX
     RET
 end
