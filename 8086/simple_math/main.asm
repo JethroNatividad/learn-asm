@@ -14,7 +14,7 @@
 .stack
 
 .data
-str_num db "256$"
+str_num db "65535$"
 str_num_count db 3
 num dd 0
 
@@ -57,11 +57,11 @@ get_input:
     LEA SI, str_num
 to_num_loop:
     XOR DX, DX
+    MOV BL, 10
+    MUL BX
     MOV DL, [SI]
     SUB DL, "0"
     SUB [SI], "0"
-    MOV BL, 10
-    MUL BL
     ADD AX, DX
     INC SI
     CMP [SI], "$"
