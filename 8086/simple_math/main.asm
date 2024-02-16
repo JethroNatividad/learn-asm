@@ -16,7 +16,7 @@
 .data
 newline db 10, 13, "$"
 first_number_prompt db "What's the first number? $"
-second_number_prompt db "What's the second number? $"
+second_number_prompt db 10, 13, "What's the second number? $"
 
 max_first_number_size db 5
 first_number_size db ?
@@ -28,7 +28,7 @@ start:
     MOV AX, @data
     MOV DS, AX
 
-    MOV DX, first_number_prompt
+    MOV DX, offset first_number_prompt
     CALL println
 
     MOV DX, offset max_first_number_size
@@ -63,18 +63,6 @@ start:
 print:
     MOV AH, 09H
     INT 21H
-    RET
-
-println:
-    MOV BX, DX
-    MOV AH, 09H
-
-    MOV DX, newline
-    INT 21H
-
-    MOV DX, BX
-    INT 21H
-    
     RET
 
 ; Inputs: max input size in DX
