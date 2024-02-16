@@ -14,9 +14,7 @@
 .stack
 
 .data
-str_num db "65535$"
-str_num_count db 3
-num dd 0
+newline db 10, 13, "$"
 
 max_first_number_size db 5
 first_number_size db ?
@@ -57,6 +55,27 @@ start:
     INT 21H
 
 ; Inputs: DX
+print:
+    MOV AH, 09H
+    INT 21H
+    RET
+
+println:
+    MOV BX, DX
+    MOV AH, 09H
+
+    MOV DX, newline
+    INT 21H
+
+    MOV DX, BX
+    INT 21H
+
+    MOV DX, newline
+    INT 21H
+    
+    RET
+
+; Inputs: max input size in DX
 get_input:
     MOV AH, 0AH
     INT 21H
