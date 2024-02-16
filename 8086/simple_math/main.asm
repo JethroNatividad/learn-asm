@@ -69,14 +69,14 @@ get_input:
     INC SI
     MOV [SI], "$"
     RET
-    ; converting to number
-    ; store num, 0
-    ; from first char
-    ; num = (num * 10) + char - "0"
 
 ; Inputs: DX
 ; Outputs: AX
 to_num:
+    ; converting to number
+    ; store num, 0
+    ; from first char to $
+    ; num = (num * 10) + char - "0"
     XOR AX, AX
     LEA SI, DX
 to_num_loop:
@@ -85,7 +85,6 @@ to_num_loop:
     MUL BX
     MOV DL, [SI]
     SUB DL, "0"
-    SUB [SI], "0"
     ADD AX, DX
     INC SI
     CMP [SI], "$"
