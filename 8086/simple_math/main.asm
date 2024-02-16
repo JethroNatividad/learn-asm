@@ -29,6 +29,7 @@ second_number_buffer db max_second_number_size dup(?)
 second_number dd 0
 
 sum dw 0
+sum_str db 6 dup(?)
 difference dw 0
 product dw 0
 quotient dw 0
@@ -98,7 +99,31 @@ start:
     MOV AH, 4CH
     INT 21H
 
-; Inputs: DX
+; Inputs: AX - input, BX - output
+to_str:
+    LEA SI, BX
+    XOR CX, CX ; counter
+    MOV BX, 10
+to_str_loop:
+    DIV BX
+    PUSH DX ; remainder
+    INC CX
+    CMP AX, 0
+    JNE to_str_loop
+to_str_loop_2:
+    POP AX
+    ADD AX, "0" ; Convert to ascii
+    MOV [SI], AX
+    INC SI
+    LOOP to_str_loop
+    RET
+
+    ; get last digit
+    ; push to stack
+
+    ; get stack until finish
+    ; convert to
+    
 print:
     MOV AH, 09H
     INT 21H
