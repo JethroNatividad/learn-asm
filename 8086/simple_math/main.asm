@@ -29,6 +29,7 @@ second_number_buffer db max_second_number_size dup(?)
 second_number dd 0
 
 sum dw 0
+difference dw 0
 
 .code
 start:
@@ -69,6 +70,11 @@ start:
     ; convert result to str
 
     ; calculate subtraction
+    XOR AX, AX
+    MOV AX, first_number
+    MOV BX, second_number
+    SUB AX, BX
+    MOV difference, AX
     ; convert result to str
 
     ; calculate multiplication
