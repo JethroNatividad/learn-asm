@@ -18,6 +18,11 @@ str_num db "65535$"
 str_num_count db 3
 num dd 0
 
+max_first_number_size db 5
+first_number_size db ?
+first_number_buffer db max_first_number_size
+first_number dd 0
+
 .code
 start:
     MOV AX, @data
