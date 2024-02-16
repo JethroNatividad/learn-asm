@@ -23,13 +23,18 @@ first_number_size db ?
 first_number_buffer db max_first_number_size dup(?)
 first_number dd 0
 
+max_second_number_size db 5
+second_number_size db ?
+second_number_buffer db max_second_number_size dup(?)
+second_number dd 0
+
 .code
 start:
     MOV AX, @data
     MOV DS, AX
 
     MOV DX, offset first_number_prompt
-    CALL println
+    CALL print
 
     MOV DX, offset max_first_number_size
     CALL get_input
@@ -37,6 +42,16 @@ start:
     MOV DX, offset first_number_buffer
     CALL to_num
     MOV first_number, AX
+
+    MOV DX, offset second_number_prompt
+    CALL print
+
+    MOV DX, offset max_second_number_size
+    CALL get_input
+
+    MOV DX, offset second_number_buffer
+    CALL to_num
+    MOV second_number, AX
 
     ; get first number
     ; convert to int
