@@ -53,6 +53,7 @@ get_input:
     ; store num, 0
     ; from first char
     ; num = (num * 10) + char - "0"
+to_num:
     XOR AX, AX
     LEA SI, str_num
 to_num_loop:
