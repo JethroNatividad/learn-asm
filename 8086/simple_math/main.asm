@@ -28,7 +28,7 @@ second_number_size db ?
 second_number_buffer db max_second_number_size dup(?)
 second_number dd 0
 
-sum dd 0
+sum dw 0
 
 .code
 start:
@@ -60,9 +60,11 @@ start:
     MOV second_number, AX
 
     ; calculate addition
-    MOV AL, first_number
-    MOV BL, second_number
-    ADD AL, BL
+    XOR AX, AX
+    MOV AX, first_number
+    MOV BX, second_number
+    ADD AX, BX
+    MOV sum, AX
 
     ; convert result to str
 
