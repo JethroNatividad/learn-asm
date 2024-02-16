@@ -30,6 +30,7 @@ second_number dd 0
 
 sum dw 0
 difference dw 0
+product dw 0
 
 .code
 start:
@@ -78,6 +79,11 @@ start:
     ; convert result to str
 
     ; calculate multiplication
+    XOR AX, AX
+    MOV AX, first_number
+    MOV BX, second_number
+    MUL BX
+    MOV product, AX
     ; convert result to str
 
     ; calculate division
