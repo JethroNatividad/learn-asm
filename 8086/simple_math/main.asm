@@ -14,9 +14,9 @@
 .stack
 
 .data
-str_num db "142$"
+str_num db "256$"
 str_num_count db 3
-num dd 1 dup(0)
+num dd 0
 
 .code
 start:
@@ -55,12 +55,14 @@ get_input:
     ; num = (num * 10) + char - "0"
     XOR AX, AX
     LEA SI, str_num
-    MOV AL, 0
 to_num_loop:
+    XOR DX, DX
+    MOV DL, [SI]
+    SUB DL, "0"
     SUB [SI], "0"
     MOV BL, 10
     MUL BL
-    ADD AL, [SI]
+    ADD AX, DX
     INC SI
     CMP [SI], "$"
     JNE to_num_loop
