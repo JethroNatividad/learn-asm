@@ -31,6 +31,7 @@ second_number dd 0
 sum dw 0
 difference dw 0
 product dw 0
+quotient dw 0
 
 .code
 start:
@@ -87,6 +88,11 @@ start:
     ; convert result to str
 
     ; calculate division
+    XOR AX, AX
+    MOV AX, first_number
+    MOV BX, second_number
+    DIV BX
+    MOV quotient, AX
     ; convert result to str
 
     MOV AH, 4CH
