@@ -14,11 +14,16 @@
 .stack
 
 .data
+str_num db "142$"
+str_num_count db 3
+num dd 1 dup(0)
 
 .code
 start:
     MOV AX, @data
     MOV DS, AX
+
+    CALL get_input
 
     ; get first number
     ; convert to int
@@ -41,12 +46,24 @@ start:
     MOV AH, 4CH
     INT 21H
 
-get_number:
+get_input:
     ; get input
 
     ; converting to number
     ; store num, 0
     ; from first char
     ; num = (num * 10) + char - "0"
-
+    XOR AX, AX
+    LEA SI, str_num
+    MOV AL, 0
+to_num_loop:
+    SUB [SI], "0"
+    MOV BL, 10
+    MUL BL
+    ADD AL, [SI]
+    INC SI
+    CMP [SI], "$"
+    JNE to_num_loop
+    MOV num, AX
+    RET
 end
