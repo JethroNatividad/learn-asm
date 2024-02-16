@@ -33,31 +33,30 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    ; get first number
     MOV DX, offset first_number_prompt
     CALL print
 
     MOV DX, offset max_first_number_size
     CALL get_input
 
+    ; convert to int
     MOV DX, offset first_number_buffer
     CALL to_num
     MOV first_number, AX
 
+    ; get second number
     MOV DX, offset second_number_prompt
     CALL print
 
     MOV DX, offset max_second_number_size
     CALL get_input
 
+    ; convert to int
     MOV DX, offset second_number_buffer
     CALL to_num
     MOV second_number, AX
 
-    ; get first number
-    ; convert to int
-
-    ; get second number
-    ; convert to int
 
     ; calculate addition
     ; convert result to str
