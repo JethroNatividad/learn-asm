@@ -124,6 +124,18 @@ start:
     MOV BX, offset quotient_str
     CALL to_str
 
+    ; print sum
+    MOV DX, offset first_number
+    CALL print
+    MOV DX, offset plus
+    CALL print
+    MOV DX, offset second_number
+    CALL print
+    MOV DX, offset equals
+    CALL print
+    MOV DX, offset sum_str
+    CALL print
+
     MOV AH, 4CH
     INT 21H
 
@@ -147,12 +159,7 @@ to_str_loop_2:
     LOOP to_str_loop_2
     RET
 
-    ; get last digit
-    ; push to stack
-
-    ; get stack until finish
-    ; convert to
-    
+; input: text in DX
 print:
     MOV AH, 09H
     INT 21H
