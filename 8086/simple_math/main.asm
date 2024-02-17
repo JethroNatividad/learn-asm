@@ -167,6 +167,20 @@ start:
     MOV DX, offset product_str
     CALL print
 
+    ; print quotient
+    MOV DX, offset newline
+    CALL print
+    MOV DX, offset first_number_buffer
+    CALL print
+    MOV DX, offset divide
+    CALL print
+    MOV DX, offset second_number_buffer
+    CALL print
+    MOV DX, offset equals
+    CALL print
+    MOV DX, offset quotient_str
+    CALL print
+
     MOV AH, 4CH
     INT 21H
 
