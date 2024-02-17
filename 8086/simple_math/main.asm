@@ -70,6 +70,10 @@ start:
     ADD AX, BX
     MOV sum, AX
 
+    MOV AX, sum
+    MOV BX, offset sum_str
+    CALL to_str
+
     ; convert result to str
 
     ; calculate subtraction
@@ -105,17 +109,18 @@ to_str:
     XOR CX, CX ; counter
     MOV BX, 10
 to_str_loop:
+    MOV DX, 00H ; Clear DX before division, DX stores the remainder
     DIV BX
     PUSH DX ; remainder
     INC CX
     CMP AX, 0
-    JNE to_str_loop
+    JG to_str_loop
 to_str_loop_2:
     POP AX
     ADD AX, "0" ; Convert to ascii
     MOV [SI], AX
     INC SI
-    LOOP to_str_loop
+    LOOP to_str_loop_2
     RET
 
     ; get last digit
