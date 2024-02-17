@@ -30,9 +30,16 @@ second_number dd 0
 
 sum dw 0
 sum_str db 6 dup(?)
+
 difference dw 0
+difference_str db 6 dup(?)
+
 product dw 0
+product_str db 6 dup(?)
+
 quotient dw 0
+quotient_str db 6 dup(?)
+
 
 .code
 start:
@@ -70,11 +77,11 @@ start:
     ADD AX, BX
     MOV sum, AX
 
+    ; convert result to str
     MOV AX, sum
     MOV BX, offset sum_str
     CALL to_str
 
-    ; convert result to str
 
     ; calculate subtraction
     XOR AX, AX
@@ -83,6 +90,10 @@ start:
     SUB AX, BX
     MOV difference, AX
     ; convert result to str
+    MOV AX, difference
+    MOV BX, offset difference_str
+    CALL to_str
+
 
     ; calculate multiplication
     XOR AX, AX
