@@ -15,6 +15,13 @@
 
 .data
 newline db 10, 13, "$"
+space db " $"
+plus db " + $"
+minus db " - $"
+multiply db " * $"
+divide db " / $"
+equals db " = $"
+
 first_number_prompt db "What's the first number? $"
 second_number_prompt db 10, 13, "What's the second number? $"
 
