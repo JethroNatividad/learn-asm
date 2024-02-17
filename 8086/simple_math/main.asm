@@ -102,6 +102,9 @@ start:
     MUL BX
     MOV product, AX
     ; convert result to str
+    MOV AX, product
+    MOV BX, offset product_str
+    CALL to_str
 
     ; calculate division
     XOR AX, AX
