@@ -113,6 +113,9 @@ start:
     DIV BX
     MOV quotient, AX
     ; convert result to str
+    MOV AX, quotient
+    MOV BX, offset quotient_str
+    CALL to_str
 
     MOV AH, 4CH
     INT 21H
