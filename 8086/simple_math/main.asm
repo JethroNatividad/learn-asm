@@ -139,6 +139,20 @@ start:
     MOV DX, offset sum_str
     CALL print
 
+    ; print difference
+    MOV DX, offset newline
+    CALL print
+    MOV DX, offset first_number_buffer
+    CALL print
+    MOV DX, offset minus
+    CALL print
+    MOV DX, offset second_number_buffer
+    CALL print
+    MOV DX, offset equals
+    CALL print
+    MOV DX, offset difference_str
+    CALL print
+
     MOV AH, 4CH
     INT 21H
 
