@@ -115,6 +115,7 @@ start:
 
     ; calculate division
     XOR AX, AX
+    XOR DX, DX
     MOV AX, first_number
     MOV BX, second_number
     DIV BX
@@ -125,11 +126,13 @@ start:
     CALL to_str
 
     ; print sum
-    MOV DX, offset first_number
+    MOV DX, offset newline
+    CALL print
+    MOV DX, offset first_number_buffer
     CALL print
     MOV DX, offset plus
     CALL print
-    MOV DX, offset second_number
+    MOV DX, offset second_number_buffer
     CALL print
     MOV DX, offset equals
     CALL print
@@ -157,6 +160,7 @@ to_str_loop_2:
     MOV [SI], AX
     INC SI
     LOOP to_str_loop_2
+    MOV [SI], "$"
     RET
 
 ; input: text in DX
