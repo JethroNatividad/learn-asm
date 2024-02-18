@@ -9,9 +9,9 @@
 
 .data
 input_age db "25$"
-age db ?
+age dw ?
 input_retire_age db "65$"
-retire_age db ?
+retire_age dw ?
 years_until_retire dw ?
 years_until_retire_str db 5 dup(?)
 current_year dw ?
@@ -24,14 +24,22 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    MOV AX, offset input_age
+    CALL str_to_num
+    MOV age, AX
+
+    MOV AX, offset input_retire_age
+    CALL str_to_num
+    MOV retire_age, AX
+
     MOV AH, 2AH
     INT 21H
     MOV current_year, CX
 
     XOR AX, AX
     XOR BX, BX
-    MOV AL, age
-    MOV BL, retire_age
+    MOV AX, age
+    MOV BX, retire_age
     SUB BX, AX
     MOV years_until_retire, BX
 
@@ -56,19 +64,19 @@ start:
     INT 21H
 
 ; Input: str in AX register
-; Output: LEA DX
 str_to_num:
     LEA SI, AX
     XOR AX, AX ; Start with 0
 str_to_num_loop:
-    MUL 10
-    MOV BX, [SI]
-    SUB BX, "0"
+    XOR BX, BX
+    MOV CX, 10
+    MUL CX 
+    MOV BL, [SI]
+    SUB BL, "0"
     ADD AX, BX
     INC SI
     CMP [SI], "$"
     JNE str_to_num_loop
-    MOV [DX], AX
     RET
 ; Input: number in AX register
 ; Output: string in LEA SI
