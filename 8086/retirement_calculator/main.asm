@@ -8,6 +8,9 @@
 .stack
 
 .data
+age_prompt db "What is your current age? $"
+retire_age_prompt db 10, 13, "At what age would you like to retire? $"
+
 max_input_age_size db 5
 input_age_size db ?
 input_age db max_input_age_size dup(?)
