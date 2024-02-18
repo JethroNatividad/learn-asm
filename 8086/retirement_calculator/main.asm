@@ -36,4 +36,21 @@ start:
 
     MOV AH, 4CH
     INT 21H
+
+num_to_str:
+    ; counter
+    ; divisor to 10
+
+    ; division loop
+    ; div num to 10
+    ; push remainder to stack
+    ; check if quotient 0
+    ; jump to loop if greater than
+
+    ; build str loop
+    ; pop stack
+    ; convert to ascii
+    ; add to var
+    ; move pointer
+    ; loop until counter 0
 end
