@@ -10,6 +10,10 @@
 .data
 age_prompt db "What is your current age? $"
 retire_age_prompt db 10, 13, "At what age would you like to retire? $"
+output_1 db "You have $"
+output_2 db " years left until you can retire.", 10, 13, "It's $"
+output_3 db ", so you can retire in $"
+output_4 db ".$"
 
 max_input_age_size db 5
 input_age_size db ?
