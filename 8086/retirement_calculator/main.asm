@@ -11,8 +11,11 @@
 age db 25
 retire_age db 65
 years_until_retire dw ?
+years_until_retire_str db 5 dup(?)
 current_year dw ?
+current_year_str db 5 dup(?)
 retirement_year dw ?
+retirement_year_str db 5 dup(?)
 
 .code
 start:
