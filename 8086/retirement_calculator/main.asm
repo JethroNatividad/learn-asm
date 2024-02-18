@@ -34,8 +34,14 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    MOV DX, offset age_prompt
+    CALL print
+
     MOV DX, offset max_input_age_size
     CALL get_input
+
+    MOV DX, offset retire_age_prompt
+    CALL print
 
     MOV DX, offset max_input_retire_age_size
     CALL get_input
