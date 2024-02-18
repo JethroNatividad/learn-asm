@@ -8,8 +8,10 @@
 .stack
 
 .data
-age db 25
-retire_age db 65
+input_age db "25$"
+age db ?
+input_retire_age db "65$"
+retire_age db ?
 years_until_retire dw ?
 years_until_retire_str db 5 dup(?)
 current_year dw ?
@@ -53,6 +55,21 @@ start:
     MOV AH, 4CH
     INT 21H
 
+; Input: str in AX register
+; Output: LEA DX
+str_to_num:
+    LEA SI, AX
+    XOR AX, AX ; Start with 0
+str_to_num_loop:
+    MUL 10
+    MOV BX, [SI]
+    SUB BX, "0"
+    ADD AX, BX
+    INC SI
+    CMP [SI], "$"
+    JNE str_to_num_loop
+    MOV [DX], AX
+    RET
 ; Input: number in AX register
 ; Output: string in LEA SI
 num_to_str:
