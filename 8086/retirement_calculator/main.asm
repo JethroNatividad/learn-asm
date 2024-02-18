@@ -31,10 +31,10 @@ start:
     MOV AX, @data
     MOV DS, AX
 
-    MOV DX, max_input_age_size
+    MOV DX, offset max_input_age_size
     CALL get_input
 
-    MOV DX, max_input_retire_age_size
+    MOV DX, offset max_input_retire_age_size
     CALL get_input
 
     MOV AX, offset input_age
@@ -84,8 +84,8 @@ get_input:
     ; Add '$' to end of input
     LEA SI, DX
     INC SI
-    MOV CL, [SI]
-    ADD SI, CL
+    MOV CX, [SI]
+    ADD SI, CX
     INC SI
     MOV [SI], "$"
     RET
