@@ -70,4 +70,5 @@ build_str_loop:
     INC SI
     ; loop until counter 0
     LOOP build_str_loop
+    MOV [SI], "$"
 end
