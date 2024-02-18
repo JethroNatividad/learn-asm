@@ -31,6 +31,12 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    MOV DX, max_input_age_size
+    CALL get_input
+
+    MOV DX, max_input_retire_age_size
+    CALL get_input
+
     MOV AX, offset input_age
     CALL str_to_num
     MOV age, AX
@@ -69,6 +75,20 @@ start:
 
     MOV AH, 4CH
     INT 21H
+
+; Inputs: max size in DX
+get_input:
+    MOV AH, 0AH
+    INT 21H
+
+    ; Add '$' to end of input
+    LEA SI, DX
+    INC SI
+    MOV CL, [SI]
+    ADD SI, CL
+    INC SI
+    MOV [SI], "$"
+    RET
 
 ; Input: str in AX register
 str_to_num:
