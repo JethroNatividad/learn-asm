@@ -72,7 +72,7 @@ division_loop:
     ; check if quotient 0
     CMP AX, 0
     ; jump to loop if greater than
-    JGE division_loop
+    JG division_loop
 build_str_loop:
     ; build str loop
     ; pop stack
