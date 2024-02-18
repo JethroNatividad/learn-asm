@@ -2,6 +2,7 @@
 ; Inputs: current age, retire age
 ; Process: calculate years until retire, get current retirement year.
 ; Outputs: years until retire, retirement year
+
 .model small
 
 .stack
@@ -37,15 +38,26 @@ start:
     MOV AH, 4CH
     INT 21H
 
+; Input: number in AX register
+; Output: string in LEA SI
 num_to_str:
     ; counter
     ; divisor to 10
-
+    XOR CX, CX
+    MOV BX, 10
+division_loop:
     ; division loop
     ; div num to 10
+    XOR DX, DX
+    DIV BX
+    INC CX
+
     ; push remainder to stack
+    PUSH DX
     ; check if quotient 0
+    CMP AX, 0
     ; jump to loop if greater than
+    JGE division_loop
 
     ; build str loop
     ; pop stack
