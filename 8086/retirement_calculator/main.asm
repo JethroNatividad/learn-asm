@@ -58,11 +58,16 @@ division_loop:
     CMP AX, 0
     ; jump to loop if greater than
     JGE division_loop
-
+build_str_loop:
     ; build str loop
     ; pop stack
+    POP AX
     ; convert to ascii
+    ADD AX, "0"
     ; add to var
+    MOV [SI], AX
     ; move pointer
+    INC SI
     ; loop until counter 0
+    LOOP build_str_loop
 end
