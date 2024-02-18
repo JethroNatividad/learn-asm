@@ -82,10 +82,11 @@ get_input:
     INT 21H
 
     ; Add '$' to end of input
+    XOR BX, BX
     LEA SI, DX
     INC SI
-    MOV CX, [SI]
-    ADD SI, CX
+    MOV BL, [SI]
+    ADD SI, BX
     INC SI
     MOV [SI], "$"
     RET
