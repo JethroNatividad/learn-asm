@@ -1,3 +1,4 @@
+; Program that takes in an age, and retirement age, then calculates the year of retirement
 .model small
 
 .stack
