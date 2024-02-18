@@ -38,6 +38,18 @@ start:
     ADD AX, BX
     MOV retirement_year, AX
 
+    MOV AX, years_until_retire
+    MOV SI, offset years_until_retire_str
+    CALL num_to_str
+
+    MOV AX, current_year
+    MOV SI, offset current_year_str
+    CALL num_to_str
+
+    MOV AX, retirement_year
+    MOV SI, offset retirement_year_str
+    CALL num_to_str
+
     MOV AH, 4CH
     INT 21H
 
