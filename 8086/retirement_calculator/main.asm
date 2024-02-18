@@ -8,9 +8,14 @@
 .stack
 
 .data
-input_age db "25$"
+max_input_age_size db 5
+input_age_size db ?
+input_age db max_input_age_size dup(?)
 age dw ?
-input_retire_age db "65$"
+
+max_input_retire_age_size db 5
+input_retire_age_size db ?
+input_retire_age db max_input_retire_age_size dup(?)
 retire_age dw ?
 
 
