@@ -83,6 +83,7 @@ start:
 print:
     MOV AH, 09H
     INT 21H
+    RET
 
 ; Inputs: max size in DX
 get_input:
