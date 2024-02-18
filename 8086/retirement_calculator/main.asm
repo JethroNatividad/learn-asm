@@ -12,6 +12,8 @@ input_age db "25$"
 age dw ?
 input_retire_age db "65$"
 retire_age dw ?
+
+
 years_until_retire dw ?
 years_until_retire_str db 5 dup(?)
 current_year dw ?
