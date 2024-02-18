@@ -1,4 +1,7 @@
 ; Program that takes in an age, and retirement age, then calculates the year of retirement
+; Inputs: current age, retire age
+; Process: calculate years until retire, get current retirement year.
+; Outputs: years until retire, retirement year
 .model small
 
 .stack
