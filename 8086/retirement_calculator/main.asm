@@ -79,6 +79,11 @@ start:
     MOV AH, 4CH
     INT 21H
 
+; inputs: print str in DX
+print:
+    MOV AH, 09H
+    INT 21H
+
 ; Inputs: max size in DX
 get_input:
     MOV AH, 0AH
