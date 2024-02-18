@@ -86,25 +86,25 @@ start:
     MOV SI, offset retirement_year_str
     CALL num_to_str
 
-    MOV AX, offset output_1
+    MOV DX, offset output_1
     CALL print
 
-    MOV AX, offset years_until_retire_str
+    MOV DX, offset years_until_retire_str
     CALL print
 
-    MOV AX, offset output_2
+    MOV DX, offset output_2
     CALL print
 
-    MOV AX, offset current_year_str
+    MOV DX, offset current_year_str
     CALL print
 
-    MOV AX, offset output_3
+    MOV DX, offset output_3
     CALL print
 
-    MOV AX, offset retirement_year_str
+    MOV DX, offset retirement_year_str
     CALL print
 
-    MOV AX, offset output_4
+    MOV DX, offset output_4
     CALL print
 
     MOV AH, 4CH
