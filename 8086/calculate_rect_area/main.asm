@@ -1,3 +1,5 @@
+; Program that calculates the sqft of a rectangular room
+
 .model small
 .stack
 
