@@ -7,6 +7,10 @@
 .stack
 
 .data
+length dw 15
+width dw 20
+area_sqft dw 0
+
 
 .code
 start:
