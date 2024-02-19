@@ -1,4 +1,7 @@
 ; Program that calculates the sqft of a rectangular room
+; Inputs: Length and Width in ft
+; Process: L*W = sqft, convert to square meters
+; Outputs: square feet, and square meters
 
 .model small
 .stack
