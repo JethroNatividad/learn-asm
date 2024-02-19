@@ -17,6 +17,11 @@ start:
     MOV AX, @data
     MOV DS, AX
 
+    MOV AX, length
+    MOV BX, width
+    MUL BX
+    MOV area_sqft, AX
+
     MOV AH, 4CH
     INT 21H
 end
