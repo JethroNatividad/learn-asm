@@ -6,8 +6,7 @@
 max_input_size db 100
 input_size db ?
 input db max_input_size dup(?)
-
-reverse_input db max_input_size dup(?)
+reverse_input db 50 dup(?)
 
 .code
 start:
@@ -45,10 +44,12 @@ reverse:
     MOV SI, AX
     XOR CX, CX
 reverse_loop:
-    PUSH [SI]
+    MOV DL, [SI]
+    PUSH DX
     INC SI
-    CMP [SI], "$"
+    MOV DL, [SI]
     INC CX
+    CMP DL, "$"
     JNE reverse_loop
     MOV SI, BX
 reverse_loop_2:
