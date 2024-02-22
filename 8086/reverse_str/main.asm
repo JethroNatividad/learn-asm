@@ -12,7 +12,7 @@ start:
     MOV AX, @data
     MOV DS, AX
 
-    MOV DX, max_input_size
+    MOV DX, offset max_input_size
     CALL get_input
 
     MOV AH, 4CH
@@ -24,9 +24,10 @@ get_input:
     INT 21H
 
     ; add $ to end of str
+    XOR BX, BX
     LEA SI, DX
     INC SI
-    MOV BX, [SI] ; input size
+    MOV BL, [SI] ; input size
     INC SI
     ADD SI, BX
     MOV [SI], "$"
