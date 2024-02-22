@@ -7,6 +7,8 @@ max_input_size db 100
 input_size db ?
 input db max_input_size dup(?)
 
+reverse_input db max_input_size dup(?)
+
 .code
 start:
     MOV AX, @data
@@ -32,5 +34,10 @@ get_input:
     ADD SI, BX
     MOV [SI], "$"
     RET
+
+; Inputs: str in DX
+; Output: reverse in DX
+reverse:
+    
     
 end
