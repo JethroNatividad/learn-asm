@@ -3,10 +3,12 @@
 .stack
 
 .data
+
 max_input_size db 100
 input_size db ?
-input db max_input_size dup(?)
-reverse_input db max_input_size dup(?)
+input_buffer db max_input_size dup(?)
+
+reverse_input db 100 dup(?)
 
 .code
 start:
@@ -16,8 +18,8 @@ start:
     MOV DX, offset max_input_size
     CALL get_input
 
-    MOV AX, offset input
-    MOV BX, offset reverse_input
+    LEA SI, input_buffer
+    LEA DI, reverse_input
     CALL reverse
 
     MOV AH, 4CH
@@ -38,11 +40,10 @@ get_input:
     MOV [SI], "$"
     RET
 
-; Inputs: str in AX, output buffer in BX
+; Inputs: str in LEA SI, output buffer in LEA DI
 reverse:
-    LEA SI, AX
-    LEA DI, BX
     XOR CX, CX
+    XOR DX, DX
 find_end:
     MOV DL, [SI]
     INC SI
@@ -55,6 +56,7 @@ reverse_loop:
     MOV DL, [SI]
     MOV [DI], DL
     INC DI
+    DEC SI
     LOOP reverse_loop
     MOV [DI], "$"
     RET 
