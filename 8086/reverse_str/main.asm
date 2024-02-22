@@ -6,7 +6,7 @@
 max_input_size db 100
 input_size db ?
 input db max_input_size dup(?)
-reverse_input db 50 dup(?)
+reverse_input db max_input_size dup(?)
 
 .code
 start:
@@ -39,24 +39,23 @@ get_input:
     RET
 
 ; Inputs: str in AX, output buffer in BX
-; Output: reverse in DX
 reverse:
-    MOV SI, AX
+    LEA SI, AX
+    LEA DI, BX
     XOR CX, CX
-reverse_loop:
+find_end:
     MOV DL, [SI]
-    PUSH DX
     INC SI
     MOV DL, [SI]
     INC CX
     CMP DL, "$"
-    JNE reverse_loop
-    MOV SI, BX
-reverse_loop_2:
-    POP [SI]
-    INC SI
-    LOOP reverse_loop_2
-    MOV [SI], "$"
-    RET
-    
+    JNE find_end
+    DEC SI
+reverse_loop:
+    MOV DL, [SI]
+    MOV [DI], DL
+    INC DI
+    LOOP reverse_loop
+    MOV [DI], "$"
+    RET 
 end
