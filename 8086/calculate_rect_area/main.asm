@@ -10,6 +10,8 @@
 length dw 15
 width dw 20
 area_sqft dw 0
+area_sqm dw 0
+sqm_factor dw 9290
 
 
 .code
@@ -21,6 +23,9 @@ start:
     MOV BX, width
     MUL BX
     MOV area_sqft, AX
+
+    MUL sqm_factor
+    MOV area_sqm, AX
 
     MOV AH, 4CH
     INT 21H
