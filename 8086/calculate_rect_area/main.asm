@@ -9,10 +9,11 @@
 .data
 length dw 15
 width dw 20
-area_sqft dw 0
-area_sqm dw 0
-sqm_factor dw 9290
-
+area_sqft dw ?
+area_sqm dw ?
+sqm_factor dw 92
+sqm_scale dw 1000
+sqm_remainder dw ?
 
 .code
 start:
@@ -24,8 +25,18 @@ start:
     MUL BX
     MOV area_sqft, AX
 
-    MUL sqm_factor
+    MOV AX, area_sqft
+    MOV BX, sqm_factor
+    MUL BX
     MOV area_sqm, AX
+
+    XOR AX, AX
+    XOR DX, DX
+    MOV AX, area_sqm
+    MOV BX, sqm_scale
+    DIV BX
+    MOV area_sqm, AX
+    MOV sqm_remainder, DX
 
     MOV AH, 4CH
     INT 21H
