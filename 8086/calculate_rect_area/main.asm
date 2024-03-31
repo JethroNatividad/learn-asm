@@ -10,7 +10,9 @@
 length dw 15
 width dw 20
 area_sqft dw ?
+area_sqft_str db 6 dup(?)
 area_sqm dw ?
+area_sqm_str db 6 dup(?)
 sqm_factor dw 92
 sqm_scale dw 1000
 sqm_remainder dw ?
@@ -29,6 +31,7 @@ start:
     MOV BX, sqm_factor
     MUL BX
     MOV area_sqm, AX
+    MOV sqm_remainder, DX
 
     XOR AX, AX
     XOR DX, DX
@@ -37,6 +40,9 @@ start:
     DIV BX
     MOV area_sqm, AX
     MOV sqm_remainder, DX
+
+    ; MOV DX, OFFSET area_sqft
+    ; CALL print_num
 
     MOV AH, 4CH
     INT 21H
