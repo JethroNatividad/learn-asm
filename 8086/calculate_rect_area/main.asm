@@ -11,11 +11,15 @@ length dw 15
 width dw 20
 area_sqft dw ?
 area_sqft_str db 6 dup(?)
+
 area_sqm dw ?
 area_sqm_str db 6 dup(?)
+
 sqm_factor dw 92
 sqm_scale dw 1000
+
 sqm_remainder dw ?
+sqm_remainder_str db 6 dup(?)
 
 .code
 start:
