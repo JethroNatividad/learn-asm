@@ -15,16 +15,16 @@ area_sqft_str db 6 dup(?)
 area_sqm dw ?
 area_sqm_str db 6 dup(?)
 
-sqm_factor dw 92
+sqm_factor dw 93
 sqm_scale dw 1000
 
 sqm_remainder dw ?
 sqm_remainder_str db 6 dup(?)
 
-length_label db "Length(ft): ", $
-width_label db "Width(ft): ", $
-sqft_label db "In Square Feet: ", $
-sqm_label db "In Square Meters: ", $
+length_label db "Length(ft): $"
+width_label db "Width(ft): $"
+sqft_label db "In Square Feet: $"
+sqm_label db "In Square Meters: $"
 
 .code
 start:
@@ -54,7 +54,16 @@ start:
     MOV BX, OFFSET area_sqft_str
     CALL num_to_str
 
+    MOV DX, OFFSET sqft_label
+    CALL print
+
     MOV DX, OFFSET area_sqft_str
+    CALL print
+
+    MOV DX, OFFSET sqm_label
+    CALL print
+
+    MOV DX, OFFSET area_sqm_str
     CALL print
 
     MOV AH, 4CH
