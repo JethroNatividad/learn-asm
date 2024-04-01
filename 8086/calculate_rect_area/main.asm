@@ -55,11 +55,11 @@ start:
     CALL num_to_str
 
     MOV AX, area_sqm
-    MOV BX OFFSET area_sqm_str
+    MOV BX, OFFSET area_sqm_str
     CALL num_to_str
 
     MOV AX, sqm_remainder
-    MOV BX OFFSET sqm_remainder_str
+    MOV BX, OFFSET sqm_remainder_str
     CALL num_to_str
 
     MOV DX, OFFSET sqft_label
