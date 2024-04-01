@@ -49,6 +49,9 @@ start:
     MOV BX, OFFSET area_sqft_str
     CALL num_to_str
 
+    MOV DX, OFFSET area_sqft_str
+    CALL print
+
     MOV AH, 4CH
     INT 21H
 
@@ -81,9 +84,5 @@ num_to_str:
 
     MOV [SI], "$"
     RET
-
-    
-    
-    
 
 end
