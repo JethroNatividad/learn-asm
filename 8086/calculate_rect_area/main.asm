@@ -27,6 +27,8 @@ sqft_label db "In Square Feet: $"
 sqm_label db "In Square Meters: $"
 newline db 10, 13, "$"
 
+period db ".$"
+
 .code
 start:
     MOV AX, @data
@@ -76,6 +78,12 @@ start:
     CALL print
 
     MOV DX, OFFSET area_sqm_str
+    CALL print
+
+    MOV DX, OFFSET period
+    CALL print
+
+    MOV DX, OFFSET sqm_remainder_str
     CALL print
 
     MOV AH, 4CH
