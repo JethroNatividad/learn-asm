@@ -25,6 +25,7 @@ length_label db "Length(ft): $"
 width_label db "Width(ft): $"
 sqft_label db "In Square Feet: $"
 sqm_label db "In Square Meters: $"
+newline db 10, 13, "$"
 
 .code
 start:
@@ -66,6 +67,9 @@ start:
     CALL print
 
     MOV DX, OFFSET area_sqft_str
+    CALL print
+
+    MOV DX, OFFSET newline
     CALL print
 
     MOV DX, OFFSET sqm_label
