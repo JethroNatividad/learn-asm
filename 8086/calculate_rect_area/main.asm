@@ -45,8 +45,9 @@ start:
     MOV area_sqm, AX
     MOV sqm_remainder, DX
 
-    ; MOV DX, OFFSET area_sqft
-    ; CALL print_num
+    MOV AX, area_sqft
+    MOV BX, OFFSET area_sqft_str
+    CALL num_to_str
 
     MOV AH, 4CH
     INT 21H
@@ -56,4 +57,21 @@ print:
     MOV AH, 09H
     INT 21H
     RET
+
+; Inputs: ax = number, bx = address to output
+num_to_str:
+    LEA SI, BX
+    XOR CX, CX
+    MOV BX, 10
+
+    extract_number_loop:
+        XOR DX, DX
+        DIV BX
+        PUSH DX
+        INC CX
+        CMP AX, 0
+        JG extract_number_loop
+    
+    
+
 end
