@@ -72,6 +72,18 @@ num_to_str:
         CMP AX, 0
         JG extract_number_loop
     
+    build_str_loop:
+        POP AX
+        ADD AX, "0"
+        MOV [SI], AX
+        INC SI
+        LOOP build_str_loop
+
+    MOV [SI], "$"
+    RET
+
+    
+    
     
 
 end
