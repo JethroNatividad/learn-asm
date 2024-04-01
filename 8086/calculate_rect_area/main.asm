@@ -21,6 +21,11 @@ sqm_scale dw 1000
 sqm_remainder dw ?
 sqm_remainder_str db 6 dup(?)
 
+length_label db "Length(ft): ", $
+width_label db "Width(ft): ", $
+sqft_label db "In Square Feet: ", $
+sqm_label db "In Square Meters: ", $
+
 .code
 start:
     MOV AX, @data
