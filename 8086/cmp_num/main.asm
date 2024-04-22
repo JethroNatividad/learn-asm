@@ -5,6 +5,9 @@
 .data
 first_number_prompt db 'Enter first number:  ', '$'
 second_number_prompt db 'Enter second number:  ', '$'
+equal_msg db ' is equal to ', '$'
+less_than_msg db ' is less than ', '$'
+greater_than_msg db ' is greater than ', '$'
 
 first_number_max_length db 100
 first_number_actual_length db ?
