@@ -4,12 +4,12 @@
 
 .data
 newline db 10, 13, '$'
-item1 db '1] 'Activity 1', '$'
-item2 db '2] 'Activity 2', '$'
-item3 db '3] 'Activity 3', '$'
-item4 db '4] 'Activity 4', '$'
-item5 db '5] 'Activity 5', '$'
-item6 db '6] 'Activity 6', '$'
+item1 db '1] Activity 1', '$'
+item2 db '2] Activity 2', '$'
+item3 db '3] Activity 3', '$'
+item4 db '4] Activity 4', '$'
+item5 db '5] Activity 5', '$'
+item6 db '6] Activity 6', '$'
 
 choice_prompt db 'Enter choice: $'
 
