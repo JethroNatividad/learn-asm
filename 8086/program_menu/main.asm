@@ -21,7 +21,7 @@ choice_field db choice_max_length dup(' ') ; buffer
 ; End Parent Program Variables
 
 
-;Program 1 Variables
+;Activity 1 Variables
 Surname_1 DB 'Alvarez', '$'
 Surname_2 DB 'Bobon', '$'
 Surname_3 DB 'Falcatan', '$'
@@ -30,7 +30,7 @@ Surname_5 DB 'Marcelino', '$'
 Surname_6 DB 'Natividad', '$'
 Surname_7 DB 'Sahibul', '$'
 Surname_8 DB 'Tulawe', '$'
-; End Program 1 Variables
+; End Activity 1 Variables
 
 .code
 start:
