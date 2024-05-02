@@ -21,7 +21,7 @@ choice_field db choice_max_length dup(' ') ; buffer
 ; End Parent Program Variables
 
 
-;Activity 1 Variables
+; Activity 1 Variables
 Surname_1 DB 'Alvarez', '$'
 Surname_2 DB 'Bobon', '$'
 Surname_3 DB 'Falcatan', '$'
@@ -31,6 +31,11 @@ Surname_6 DB 'Natividad', '$'
 Surname_7 DB 'Sahibul', '$'
 Surname_8 DB 'Tulawe', '$'
 ; End Activity 1 Variables
+
+; Activity 2 Variables
+press_any_key_msg DB 10, 13, 'Press any key to continue', '$'
+clear_string DB '                          ', '$'
+; End Activity 2 Variables
 
 .code
 start:
@@ -231,6 +236,136 @@ start:
             MOV AH, 09H
             INT 21H
             JMP exit
+        activity_2:
+            CALL clear_screen
+            ; Surname 1
+            ; Set cursor position
+            MOV DH, 0 ; Row number
+            MOV DL, 0 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt 
+            
+            ; Load address of the string
+            LEA DX, Surname_1
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+
+            CALL PROMPT_NEXT
+                
+            ; Surname 2
+            ; Set cursor position
+            MOV DH, 2 ; Row number
+            MOV DL, 7 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt 
+
+            
+            ; Load address of the string
+            LEA DX, Surname_2
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+            
+            CALL PROMPT_NEXT
+
+            ; Surname 3
+            ; Set cursor position
+            MOV DH, 4 ; Row number
+            MOV DL, 12 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt 
+            
+            ; Load address of the string
+            LEA DX, Surname_3
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+
+            CALL PROMPT_NEXT
+            
+            ; Surname 4
+            ; Set cursor position
+            MOV DH, 6 ; Row number
+            MOV DL, 20 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt
+            
+            ; Load address of the string
+            LEA DX, Surname_4
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+
+            CALL PROMPT_NEXT
+            
+            ; Surname 5
+            ; Set cursor position
+            MOV DH, 8 ; Row number
+            MOV DL, 25 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt
+
+            
+            ; Load address of the string
+            LEA DX, Surname_5
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+
+            CALL PROMPT_NEXT
+            
+            ; Surname 6
+            ; Set cursor position
+            MOV DH, 10 ; Row number
+            MOV DL, 34 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt
+            
+            ; Load address of the string
+            LEA DX, Surname_6
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
+
+            CALL PROMPT_NEXT
+            
+            ; Surname 7
+            ; Set cursor position
+            MOV DH, 12 ; Row number
+            MOV DL, 43 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt
+
+            ; Load address of the string
+            LEA DX, Surname_7
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H 
+
+            CALL PROMPT_NEXT
+            
+            ; Surname 8
+            ; Set cursor position
+            MOV DH, 14 ; Row number
+            MOV DL, 50 ; Column number
+            MOV AH, 02H ; Function to set cursor position
+            INT 10H     ; BIOS interrupt
+
+            
+            ; Load address of the string
+            LEA DX, Surname_8
+            
+            ; Output the string loaded in DX
+            MOV AH, 09H
+            INT 21H
         exit:
 
         MOV AH, 4CH
@@ -246,5 +381,25 @@ clear_screen:
     mov ax, 3
     int 10h
     RET
+    
+; For activity 2
+PROMPT_NEXT:
+    LEA DX, press_any_key_msg ; print msg
+    MOV AH, 09H
+    INT 21H
 
+    MOV AH, 01H ; wait for input
+    INT 21H
+
+    MOV AH, 03H  ; Get cursor position
+    INT 10H
+
+    MOV AH, 02H  ; Set cursor position
+    INT 10H
+
+    MOV AH, 09H  ; Display string
+    LEA DX, clear_string
+    INT 21H
+
+    RET
 end start
