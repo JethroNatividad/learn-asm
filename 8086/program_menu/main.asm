@@ -1,7 +1,4 @@
 ; Create a menu that you can select, and prints the message.
-.model small
-.stack
-
 .data
 ; Parent Program Variables
 newline db 10, 13, '$'
@@ -39,11 +36,11 @@ pre_name db 'Name: ', '$'
 age_prompt db 10, 13, 'How old are you? ', '$'
 pre_age db 10, 13, 'Age: ', '$'
 
-name_max_length db 100
+name_max_length db 30
 name_actual_length db ?
 name_field db name_max_length dup(' ') ; buffer
 
-age_max_length db 100
+age_max_length db 30
 age_actual_length db ?
 age_field db age_max_length dup(' ') ; buffer
 ; End Activity 2 Variables
@@ -56,55 +53,56 @@ equal_msg db ' is equal to ', '$'
 less_than_msg db ' is less than ', '$'
 greater_than_msg db ' is greater than ', '$'
 
-first_number_max_length db 100
+first_number_max_length db 30
 first_number_actual_length db ?
 first_number_field db first_number_max_length dup(' ') ; buffer
 first_number dw 0
 
-second_number_max_length db 100
+second_number_max_length db 30
 second_number_actual_length db ?
 second_number_field db second_number_max_length dup(' ') ; buffer
 second_number dw 0
 
-third_number_max_length db 100
+third_number_max_length db 30
 third_number_actual_length db ?
 third_number_field db third_number_max_length dup(' ') ; buffer
 third_number dw 0
 
 largest_number dw 0
 largest_number_label db 'The largest number is: ', '$'
-largest_number_str db 100 dup(' ')
+largest_number_str db 30 dup(' ')
 ; End Activity 3 Variables
 
 ; Activity 4 Variables
+output1 db 10, 13, "One day our teacher decided to quit his job and apply to be the school's $"
+output2 db ". The employer of the university however thought that he was too $"
+output3 db ".  So our teacher decided to $"
+output4 db ", not knowing that his $"
+output5 db " broke down, costing him the job. $"
+
 verb_prompt db "Enter a verb: $"
 noun_prompt db 10, 13, "Enter a noun: $"
 occupation_prompt db 10, 13, "Enter an occupation: $"
 adjective_prompt db 10, 13, "Enter an adjective: $"
 
-max_input_noun_size db 100
+max_input_noun_size db 30
 input_noun_size db ?
 input_noun_buffer db max_input_noun_size dup(' ')
 
-max_input_verb_size db 100
-input_verb_size db ?
-input_verb_buffer db max_input_verb_size dup(' ')
-
-max_input_occupation_size db 100
+max_input_occupation_size db 30
 input_occupation_size db ?
 input_occupation_buffer db max_input_occupation_size dup(' ')
 
-max_input_adjective_size db 100
+max_input_adjective_size db 30
 input_adjective_size db ?
 input_adjective_buffer db max_input_adjective_size dup(' ')
 
-output1 db 10, 13, "One day our teacher decided to quit his job and apply to be the school's $"
-output2 db ". The employer of the university however thought that he was too $"
-output3 db ".  So our teacher decided to $"
-output4 db ", not knowing that his $"
-output5 db " broke down, costing him the job $"
+max_input_verb_size db 30
+input_verb_size db ?
+input_verb_buffer db max_input_verb_size dup(' ')
 
 ; End Activity 4 Variables
+
 
 .code
 start:
@@ -567,7 +565,6 @@ num_to_str_loop_2:
     MOV [SI], "$"
     RET
 
-; input: max input size in DX
 get_input:
     MOV AH, 0AH
     INT 21H
