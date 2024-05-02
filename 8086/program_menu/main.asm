@@ -73,6 +73,7 @@ third_number dw 0
 
 largest_number dw 0
 largest_number_label db 'The largest number is: ', '$'
+largest_number_str db 100 dup(' ')
 ; End Activity 3 Variables
 
 .code
@@ -413,6 +414,10 @@ start:
             CALL num_to_str
 
             ; Print largest number
+            MOV AH, 09H
+            LEA DX, newline
+            INT 21H
+            
             MOV AH, 09H
             LEA DX, largest_number_label
             INT 21H
