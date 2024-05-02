@@ -5,6 +5,7 @@
 .data
 first_number_prompt db 'Enter first number:  ', '$'
 second_number_prompt db 'Enter second number:  ', '$'
+third_number_prompt db 'Enter third number:  ', '$'
 equal_msg db ' is equal to ', '$'
 less_than_msg db ' is less than ', '$'
 greater_than_msg db ' is greater than ', '$'
@@ -19,6 +20,14 @@ second_number_max_length db 100
 second_number_actual_length db ?
 second_number_field db second_number_max_length dup(' ') ; buffer
 second_number dw 0
+
+third_number_max_length db 100
+third_number_actual_length db ?
+third_number_field db third_number_max_length dup(' ') ; buffer
+third_number dw 0
+
+largest_number db 0
+largest_number_label db 'The largest number is: ', '$'
 
 .code
 start:
@@ -66,32 +75,45 @@ start:
     CALL str_to_num
     MOV second_number, AX
 
-    ; Print output
+    ; Get third number
     MOV AH, 09H
-    LEA DX, newline
+    LEA DX, third_number_prompt
     INT 21H
 
-    MOV AH, 09H
-    LEA DX, first_number_field
+    MOV AH, 0AH
+    LEA DX, third_number_max_length
     INT 21H
+    ; Add '$' to end
+    XOR BX, BX
+    MOV BL, third_number_actual_length
+    MOV third_number_field[BX], '$'
 
+    ; Convert to int
+    LEA SI, third_number_field
+    CALL str_to_num
+    MOV third_number, AX
+
+    ; Get the largest number
+    ; 1st > 2nd ? 1st > 3rd ? 1st : 3rd : 2nd > 3rd ? 2nd : 3rd
     MOV AX, first_number
-    MOV BX, second_number
+    CMP AX, second_number
+    JG first_greater_than_second
+    MOV AX, second_number
+    first_greater_than_second:
+    CMP AX, third_number
+    JG first_greater_than_third
+    MOV AX, third_number
+    first_greater_than_third:
+    MOV largest_number, AX
 
-    CMP AX, BX
-    JE equal
-    JG greater_than
-    JL less_than
+    ; Print largest number
+    MOV AH, 09H
+    LEA DX, largest_number_label
+    INT 21H
 
-    equal:
-        LEA DX, equal_msg
-        JMP exit
-    less_than:
-        LEA DX, less_than_msg
-        JMP exit
-    greater_than:
-        LEA DX, greater_than_msg
-        JMP exit
+    MOV AH, 09H
+    LEA DX, third_number_field
+    INT 21H
 
     exit:
     MOV AH, 09H
