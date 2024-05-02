@@ -118,7 +118,7 @@ start:
         CMP choice_field, '2'
         JE activity_2
         CMP choice_field, '3'
-        JE activity_1
+        JE activity_3
         CMP choice_field, '4'
         JE activity_1
         CMP choice_field, '5'
