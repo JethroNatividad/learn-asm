@@ -100,7 +100,7 @@ start:
         CMP choice_field, '1'
         JE activity_1
         CMP choice_field, '2'
-        JE activity_1
+        JE activity_2
         CMP choice_field, '3'
         JE activity_1
         CMP choice_field, '4'
@@ -381,7 +381,7 @@ clear_screen:
     mov ax, 3
     int 10h
     RET
-    
+
 ; For activity 2
 PROMPT_NEXT:
     LEA DX, press_any_key_msg ; print msg
