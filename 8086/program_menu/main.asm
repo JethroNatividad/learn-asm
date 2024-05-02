@@ -103,6 +103,19 @@ input_verb_buffer db max_input_verb_size dup(' ')
 
 ; End Activity 4 Variables
 
+; Activity 5 Variables
+prompt_message db "What is the input string? $"
+output_message db 10, 13, "$"
+output_message1 db " has $"
+output_message2 db " character/s. ", 10, 13, "$"
+
+max_input_size db 100
+input_size db ?
+input_buffer db max_input_size dup('' )
+
+input_size_str db 3 dup(' ') ; 3 as max input size only 100
+; End Activity 5 Variables
+
 
 .code
 start:
@@ -173,9 +186,9 @@ start:
         CMP choice_field, '4'
         JE activity_4
         CMP choice_field, '5'
-        JE activity_1
+        JE activity_5
         CMP choice_field, '6'
-        JE activity_1
+        JE activity_6
 
         LEA DX, invalid_choice
         CALL print
@@ -507,6 +520,41 @@ start:
             LEA DX, output5
             CALL print
 
+            JMP exit
+
+        activity_5:
+            CALL clear_screen
+            LEA DX, prompt_message
+            CALL print
+
+            LEA DX, max_input_size
+            CALL get_input
+
+            ; input size to str
+            LEA BX, input_size_str
+            LEA DX, input_size
+            CALL num_to_str
+
+            ; Print output
+            LEA DX, output_message
+            CALL print
+
+            LEA DX, input_buffer
+            CALL print
+
+            LEA DX, output_message1
+            CALL print
+
+            LEA DX, input_size_str
+            CALL print
+
+            LEA DX, output_message2
+            CALL print
+
+            JMP exit
+        activity_6:
+            CALL clear_screen
+            jmp exit
         exit:
 
         MOV AH, 4CH
