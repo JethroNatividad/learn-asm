@@ -532,7 +532,7 @@ start:
 
             ; input size to str
             LEA BX, input_size_str
-            LEA DX, input_size
+            LEA AX, input_size
             CALL num_to_str
 
             ; Print output
