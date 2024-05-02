@@ -71,7 +71,7 @@ third_number_actual_length db ?
 third_number_field db third_number_max_length dup(' ') ; buffer
 third_number dw 0
 
-largest_number db 0
+largest_number dw 0
 largest_number_label db 'The largest number is: ', '$'
 ; End Activity 3 Variables
 
@@ -376,6 +376,10 @@ start:
 
             ; Get third number
             MOV AH, 09H
+            LEA DX, newline
+            INT 21H
+            
+            MOV AH, 09H
             LEA DX, third_number_prompt
             INT 21H
 
@@ -405,13 +409,16 @@ start:
             first_greater_than_third:
             MOV largest_number, AX
 
+            LEA BX, largest_number_str
+            CALL num_to_str
+
             ; Print largest number
             MOV AH, 09H
             LEA DX, largest_number_label
             INT 21H
 
             MOV AH, 09H
-            LEA DX, third_number_field
+            LEA DX, largest_number_str
             INT 21H
 
             JMP exit
@@ -451,6 +458,27 @@ str_to_num:
         JMP str_to_num_loop
     end_str_to_num:
         RET
+
+; Inputs: AX - input, BX - output
+num_to_str:
+    LEA SI, BX
+    XOR CX, CX ; counter
+    MOV BX, 10
+num_to_str_loop:
+    MOV DX, 00H ; Clear DX before division, DX stores the remainder
+    DIV BX
+    PUSH DX ; remainder
+    INC CX
+    CMP AX, 0
+    JG num_to_str_loop
+num_to_str_loop_2:
+    POP AX
+    ADD AX, "0" ; Convert to ascii
+    MOV [SI], AX
+    INC SI
+    LOOP num_to_str_loop_2
+    MOV [SI], "$"
+    RET
 
 
 end start
