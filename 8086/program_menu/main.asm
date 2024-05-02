@@ -10,6 +10,7 @@ item3 db '3] Activity 3', '$'
 item4 db '4] Activity 4', '$'
 item5 db '5] Activity 5', '$'
 item6 db '6] Activity 6', '$'
+invalid_choice db 'Invalid choice, please try again.', '$'
 
 choice_prompt db 'Enter choice: $'
 
@@ -83,6 +84,18 @@ start:
         JE activity_1
         CMP choice_field, '3'
         JE activity_1
+        CMP choice_field, '4'
+        JE activity_1
+        CMP choice_field, '5'
+        JE activity_1
+        CMP choice_field, '6'
+        JE activity_1
+
+        LEA DX, invalid_choice
+        CALL print
+        LEA DX, newline
+        CALL print
+        JMP get_choice
 
         activity_1:
             LEA DX, item1
@@ -90,6 +103,8 @@ start:
             JMP exit
 
         exit:
+
+
 
         MOV AH, 4CH
         INT 21H
