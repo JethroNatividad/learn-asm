@@ -77,7 +77,6 @@ start:
         CALL print
 
         ; Compare choice and print message
-        CMP choice
         CMP choice_field, '1'
         JE activity_1
         CMP choice_field, '2'
