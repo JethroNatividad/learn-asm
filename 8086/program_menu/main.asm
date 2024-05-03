@@ -92,11 +92,11 @@ output_message db 10, 13, "$"
 output_message1 db " has $"
 output_message2 db " character/s. ", 10, 13, "$"
 
-max_input_size db 100
-input_size db ?
-input_buffer db max_input_size dup('' )
+; max_input_size db 100
+; input_size db ?
+; input_buffer db max_input_size dup('' )
 
-input_size_str db 3 dup(' ') ; 3 as max input size only 100
+input_size_str db ' ' ; 3 as max input size only 100
 ; End Activity 5 Variables
 
 
@@ -481,60 +481,32 @@ start:
         activity_5:
             CALL clear_screen
 
-            MOV AH, 09H
-            MOV DX, offset prompt_message
-            INT 21H
+            LEA DX, prompt_message
+            CALL print
 
-            MOV DX, offset max_input_size
-            INT 21H
+            LEA DX, input1_max_length
+            CALL get_input
 
+            ;  convert input1_actual_length to string
             XOR AX, AX
-            XOR CX, CX
-            MOV AL, input_size
-            MOV BX, 10 ; to divide
-            input_size_to_string_loop:
-                ; divide by 10 until 0
-                ; push remainder to stack
-                XOR DX, DX ; clear dx, dx stores remainder
-                DIV BX
-                PUSH DX
-                INC CX
-                CMP AX, 0
-                JNE input_size_to_string_loop
+            MOV AL, input1_actual_length
+            LEA BX, input_size_str
+            CALL num_to_str
+            
+            LEA DX, output_message
+            CALL print
 
-                LEA SI, input_size_str
-            input_size_to_string_loop2:
-                ; pop stack one by one, add "0"
-                ; append to string input size
-                POP AX
-                ADD AL, "0"
+            LEA DX, input1_field
+            CALL print
 
-                MOV [SI], AL
-                INC SI
-                LOOP input_size_to_string_loop2
+            LEA DX, output_message1
+            CALL print
 
-                ; add $ to the end
-                MOV [SI], "$"
+            LEA DX, input_size_str
+            CALL print
 
-                MOV AH, 09H
-                MOV DX, offset output_message
-                INT 21H
-
-                MOV AH, 09H
-                MOV DX, offset input_buffer
-                INT 21H
-
-                MOV AH, 09H
-                MOV DX, offset output_message1
-                INT 21H
-
-                MOV AH, 09H
-                MOV DX, offset input_size_str
-                INT 21H
-
-                MOV AH, 09H
-                MOV DX, offset output_message2
-                INT 21H
+            LEA DX, output_message2
+            CALL print
 
             JMP exit
         activity_6:
