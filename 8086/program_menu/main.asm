@@ -18,7 +18,7 @@ choice_actual_length db ?
 choice_field db choice_max_length dup(' ') ; buffer
 ; End Parent Program Variables
 
-; global
+; global inputs
 input1_max_length db 50
 input1_actual_length db ?
 input1_field db input1_max_length dup(' ')
@@ -96,21 +96,21 @@ noun_prompt db 10, 13, "Enter a noun: $"
 occupation_prompt db 10, 13, "Enter an occupation: $"
 adjective_prompt db 10, 13, "Enter an adjective: $"
 
-max_input_noun_size db 30
-input_noun_size db ?
-input_noun_buffer db max_input_noun_size dup(' ')
+; max_input_noun_size db 30
+; input_noun_size db ?
+; input_noun_buffer db max_input_noun_size dup(' ')
 
-max_input_occupation_size db 30
-input_occupation_size db ?
-input_occupation_buffer db max_input_occupation_size dup(' ')
+; max_input_occupation_size db 30
+; input_occupation_size db ?
+; input_occupation_buffer db max_input_occupation_size dup(' ')
 
-max_input_adjective_size db 30
-input_adjective_size db ?
-input_adjective_buffer db max_input_adjective_size dup(' ')
+; max_input_adjective_size db 30
+; input_adjective_size db ?
+; input_adjective_buffer db max_input_adjective_size dup(' ')
 
-max_input_verb_size db 30
-input_verb_size db ?
-input_verb_buffer db max_input_verb_size dup(' ')
+; max_input_verb_size db 30
+; input_verb_size db ?
+; input_verb_buffer db max_input_verb_size dup(' ')
 
 ; End Activity 4 Variables
 
@@ -455,50 +455,50 @@ start:
 
         activity_4:
             CALL clear_screen
-
-            MOV DX, offset verb_prompt
+            ; verb = input1, noun = input2, occupation = input3, adjective = input4
+            LEA DX, verb_prompt
             CALL print
-            MOV DX, offset max_input_verb_size
+            LEA DX, input1_max_length
             CALL get_input
 
-            MOV DX, offset noun_prompt
+            LEA DX, noun_prompt
             CALL print
-            MOV DX, offset max_input_noun_size
+            LEA DX, input2_max_length
             CALL get_input
 
-            MOV DX, offset occupation_prompt
+            LEA DX, occupation_prompt
             CALL print
-            MOV DX, offset max_input_occupation_size
+            LEA DX, input3_max_length
             CALL get_input
 
-            MOV DX, offset adjective_prompt
+            LEA DX, adjective_prompt
             CALL print
-            MOV DX, offset max_input_adjective_size
+            LEA DX, input4_max_length
             CALL get_input
 
             ; Print output
             LEA DX, output1
             CALL print
 
-            LEA DX, input_occupation_buffer
+            LEA DX, input3_field
             CALL print
 
             LEA DX, output2
             CALL print
 
-            LEA DX, input_adjective_buffer
+            LEA DX, input4_field
             CALL print
 
             LEA DX, output3
             CALL print
 
-            LEA DX, input_verb_buffer
+            LEA DX, input1_field
             CALL print
 
             LEA DX, output4
             CALL print
 
-            LEA DX, input_noun_buffer
+            LEA DX, input2_field
             CALL print
 
             LEA DX, output5
