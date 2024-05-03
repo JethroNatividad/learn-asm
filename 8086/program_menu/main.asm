@@ -64,19 +64,19 @@ equal_msg db ' is equal to ', '$'
 less_than_msg db ' is less than ', '$'
 greater_than_msg db ' is greater than ', '$'
 
-first_number_max_length db 30
-first_number_actual_length db ?
-first_number_field db first_number_max_length dup(' ') ; buffer
+; first_number_max_length db 30
+; first_number_actual_length db ?
+; first_number_field db first_number_max_length dup(' ') ; buffer
 first_number dw 0
 
-second_number_max_length db 30
-second_number_actual_length db ?
-second_number_field db second_number_max_length dup(' ') ; buffer
+; second_number_max_length db 30
+; second_number_actual_length db ?
+; second_number_field db second_number_max_length dup(' ') ; buffer
 second_number dw 0
 
-third_number_max_length db 30
-third_number_actual_length db ?
-third_number_field db third_number_max_length dup(' ') ; buffer
+; third_number_max_length db 30
+; third_number_actual_length db ?
+; third_number_field db third_number_max_length dup(' ') ; buffer
 third_number dw 0
 
 largest_number dw 0
@@ -384,65 +384,44 @@ start:
         activity_3:
             CALL clear_screen
             ; Get first number
-            MOV AH, 09H
             LEA DX, first_number_prompt
-            INT 21H
+            CALL print
 
-            MOV AH, 0AH
-            LEA DX, first_number_max_length
-            INT 21H
-            ; Add '$' to end
-            XOR BX, BX
-            MOV BL, first_number_actual_length
-            MOV first_number_field[BX], '$'
+            LEA DX, input1_max_length
+            CALL get_input
 
             ; Convert to int
-            LEA SI, first_number_field
+            LEA SI, input1_field
             CALL str_to_num
             MOV first_number, AX
 
             ; Get second number
-            MOV AH, 09H
             LEA DX, newline
-            INT 21H
+            CALL print
 
-            MOV AH, 09H
             LEA DX, second_number_prompt
-            INT 21H
+            CALL print
 
-            MOV AH, 0AH
-            LEA DX, second_number_max_length
-            INT 21H
-
-            ; Add '$' to end
-            XOR BX, BX
-            MOV BL, second_number_actual_length
-            MOV second_number_field[BX], '$'
+            LEA DX, input2_max_length
+            CALL get_input
 
             ; Convert to int
-            LEA SI, second_number_field
+            LEA SI, input2_field
             CALL str_to_num
             MOV second_number, AX
 
             ; Get third number
-            MOV AH, 09H
             LEA DX, newline
-            INT 21H
+            CALL print
             
-            MOV AH, 09H
             LEA DX, third_number_prompt
-            INT 21H
+            CALL print
 
-            MOV AH, 0AH
-            LEA DX, third_number_max_length
-            INT 21H
-            ; Add '$' to end
-            XOR BX, BX
-            MOV BL, third_number_actual_length
-            MOV third_number_field[BX], '$'
+            LEA DX, input3_max_length
+            CALL get_input
 
             ; Convert to int
-            LEA SI, third_number_field
+            LEA SI, input3_field
             CALL str_to_num
             MOV third_number, AX
 
@@ -463,17 +442,14 @@ start:
             CALL num_to_str
 
             ; Print largest number
-            MOV AH, 09H
             LEA DX, newline
-            INT 21H
+            CALL print
 
-            MOV AH, 09H
             LEA DX, largest_number_label
-            INT 21H
+            CALL print
 
-            MOV AH, 09H
             LEA DX, largest_number_str
-            INT 21H
+            CALL print
 
             JMP exit
 
