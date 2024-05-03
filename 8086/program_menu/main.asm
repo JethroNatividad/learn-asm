@@ -64,19 +64,8 @@ equal_msg db ' is equal to ', '$'
 less_than_msg db ' is less than ', '$'
 greater_than_msg db ' is greater than ', '$'
 
-; first_number_max_length db 30
-; first_number_actual_length db ?
-; first_number_field db first_number_max_length dup(' ') ; buffer
 first_number dw 0
-
-; second_number_max_length db 30
-; second_number_actual_length db ?
-; second_number_field db second_number_max_length dup(' ') ; buffer
 second_number dw 0
-
-; third_number_max_length db 30
-; third_number_actual_length db ?
-; third_number_field db third_number_max_length dup(' ') ; buffer
 third_number dw 0
 
 largest_number dw 0
@@ -95,23 +84,6 @@ verb_prompt db "Enter a verb: $"
 noun_prompt db 10, 13, "Enter a noun: $"
 occupation_prompt db 10, 13, "Enter an occupation: $"
 adjective_prompt db 10, 13, "Enter an adjective: $"
-
-; max_input_noun_size db 30
-; input_noun_size db ?
-; input_noun_buffer db max_input_noun_size dup(' ')
-
-; max_input_occupation_size db 30
-; input_occupation_size db ?
-; input_occupation_buffer db max_input_occupation_size dup(' ')
-
-; max_input_adjective_size db 30
-; input_adjective_size db ?
-; input_adjective_buffer db max_input_adjective_size dup(' ')
-
-; max_input_verb_size db 30
-; input_verb_size db ?
-; input_verb_buffer db max_input_verb_size dup(' ')
-
 ; End Activity 4 Variables
 
 ; Activity 5 Variables
