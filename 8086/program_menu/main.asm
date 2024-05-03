@@ -95,6 +95,13 @@ output_message2 db " character/s. ", 10, 13, "$"
 input_size_str db ' '
 ; End Activity 5 Variables
 
+; Activity 6 Variables
+
+reverse_prompt db 'Enter string to reverse: $'
+reverse_input db 100 dup(' ')
+
+; End Activity 6 Variables
+
 
 .code
 start:
@@ -507,6 +514,23 @@ start:
             JMP exit
         activity_6:
             CALL clear_screen
+
+            LEA DX, reverse_prompt
+            CALL print
+
+            LEA DX, input1_max_length
+            CALL get_input
+
+            LEA SI, input1_field
+            LEA DI, reverse_input
+            CALL reverse
+
+            LEA DX, newline
+            CALL print
+
+            LEA DX, reverse_input
+            CALL print
+
             jmp exit
         exit:
 
@@ -579,5 +603,26 @@ get_input:
     ADD SI, BX ; buffer location
     MOV [SI], "$"
     RET
+
+; Inputs: str in LEA SI, output buffer in LEA DI
+reverse:
+    XOR CX, CX
+    XOR DX, DX
+find_end:
+    MOV DL, [SI]
+    INC SI
+    MOV DL, [SI]
+    INC CX
+    CMP DL, "$"
+    JNE find_end
+    DEC SI
+reverse_loop:
+    MOV DL, [SI]
+    MOV [DI], DL
+    INC DI
+    DEC SI
+    LOOP reverse_loop
+    MOV [DI], "$"
+    RET 
 
 end start
