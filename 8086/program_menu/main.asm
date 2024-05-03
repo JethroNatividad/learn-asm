@@ -315,11 +315,6 @@ start:
             LEA DX, input1_max_length
             CALL get_input
 
-            ; Add $ to end of input
-            ; XOR BH, BH
-            ; MOV BL, input1_actual_length
-            ; MOV input1_field[BX], '$'
-
             ; --- Prompt for age ---
             ; Print prompt
             MOV AH, 09H
@@ -330,17 +325,10 @@ start:
             LEA DX, input2_max_length
             CALL get_input
 
-
-            ; Add $ to end of input
-            ; XOR BH, BH
-            ; MOV BL, input2_actual_length
-            ; MOV input2_field[BX], '$'
-
             ; Clear screen
             MOV AH, 00H
             MOV AL, 03H
             INT 10H
-
 
             ; Print name
             LEA DX, pre_name
