@@ -1,5 +1,6 @@
 ; Create a menu that you can select, and prints the message.
 .data
+
 ; Parent Program Variables
 newline db 10, 13, '$'
 item1 db '1] Activity 1', '$'
@@ -16,6 +17,24 @@ choice_max_length db 2
 choice_actual_length db ?
 choice_field db choice_max_length dup(' ') ; buffer
 ; End Parent Program Variables
+
+; global
+input1_max_length db 50
+input1_actual_length db ?
+input1_field db input1_max_length dup(' ')
+
+input2_max_length db 50
+input2_actual_length db ?
+input2_field db input2_max_length dup(' ')
+
+input3_max_length db 50
+input3_actual_length db ?
+input3_field db input3_max_length dup(' ')
+
+input4_max_length db 50
+input4_actual_length db ?
+input4_field db input4_max_length dup(' ')
+; end global
 
 
 ; Activity 1 Variables
@@ -35,14 +54,6 @@ pre_name db 'Name: ', '$'
 
 age_prompt db 10, 13, 'How old are you? ', '$'
 pre_age db 10, 13, 'Age: ', '$'
-
-name_max_length db 30
-name_actual_length db ?
-name_field db name_max_length dup(' ') ; buffer
-
-age_max_length db 30
-age_actual_length db ?
-age_field db age_max_length dup(' ') ; buffer
 ; End Activity 2 Variables
 
 ; Activity 3 Variables
@@ -326,14 +337,13 @@ start:
             INT 21H
 
             ; Get Input
-            MOV AH, 0AH
-            LEA DX, name_max_length
-            INT 21H
+            LEA DX, input1_max_length
+            CALL get_input
 
             ; Add $ to end of input
-            XOR BH, BH
-            MOV BL, name_actual_length
-            MOV name_field[BX], '$'
+            ; XOR BH, BH
+            ; MOV BL, input1_actual_length
+            ; MOV input1_field[BX], '$'
 
             ; --- Prompt for age ---
             ; Print prompt
@@ -342,14 +352,14 @@ start:
             INT 21H
 
             ; Get Input
-            MOV AH, 0AH
-            LEA DX, age_max_length
-            INT 21H
+            LEA DX, input2_max_length
+            CALL get_input
+
 
             ; Add $ to end of input
-            XOR BH, BH
-            MOV BL, age_actual_length
-            MOV age_field[BX], '$'
+            ; XOR BH, BH
+            ; MOV BL, input2_actual_length
+            ; MOV input2_field[BX], '$'
 
             ; Clear screen
             MOV AH, 00H
@@ -358,18 +368,16 @@ start:
 
 
             ; Print name
-            MOV AH, 09H
             LEA DX, pre_name
-            INT 21H
-            LEA DX, name_field
-            INT 21H
+            CALL print
+            LEA DX, input1_field
+            CALL print
             
             ; Print age
-            MOV AH, 09H
             LEA DX, pre_age
-            INT 21H
-            LEA DX, age_field
-            INT 21H
+            CALL print
+            LEA DX, input2_field
+            CALL print
 
             JMP exit
         
