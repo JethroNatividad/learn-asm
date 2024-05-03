@@ -92,11 +92,7 @@ output_message db 10, 13, "$"
 output_message1 db " has $"
 output_message2 db " character/s. ", 10, 13, "$"
 
-; max_input_size db 100
-; input_size db ?
-; input_buffer db max_input_size dup('' )
-
-input_size_str db ' ' ; 3 as max input size only 100
+input_size_str db ' '
 ; End Activity 5 Variables
 
 
