@@ -524,32 +524,61 @@ start:
 
         activity_5:
             CALL clear_screen
-            LEA DX, prompt_message
-            CALL print
 
-            LEA DX, max_input_size
-            CALL get_input
+            MOV AH, 09H
+            MOV DX, offset prompt_message
+            INT 21H
 
-            ; input size to str
-            LEA BX, input_size_str
-            LEA AX, input_size
-            CALL num_to_str
+            MOV DX, offset max_input_size
+            INT 21H
 
-            ; Print output
-            LEA DX, output_message
-            CALL print
+            XOR AX, AX
+            XOR CX, CX
+            MOV AL, input_size
+            MOV BX, 10 ; to divide
+            input_size_to_string_loop:
+                ; divide by 10 until 0
+                ; push remainder to stack
+                XOR DX, DX ; clear dx, dx stores remainder
+                DIV BX
+                PUSH DX
+                INC CX
+                CMP AX, 0
+                JNE input_size_to_string_loop
 
-            LEA DX, input_buffer
-            CALL print
+                LEA SI, input_size_str
+            input_size_to_string_loop2:
+                ; pop stack one by one, add "0"
+                ; append to string input size
+                POP AX
+                ADD AL, "0"
 
-            LEA DX, output_message1
-            CALL print
+                MOV [SI], AL
+                INC SI
+                LOOP input_size_to_string_loop2
 
-            LEA DX, input_size_str
-            CALL print
+                ; add $ to the end
+                MOV [SI], "$"
 
-            LEA DX, output_message2
-            CALL print
+                MOV AH, 09H
+                MOV DX, offset output_message
+                INT 21H
+
+                MOV AH, 09H
+                MOV DX, offset input_buffer
+                INT 21H
+
+                MOV AH, 09H
+                MOV DX, offset output_message1
+                INT 21H
+
+                MOV AH, 09H
+                MOV DX, offset input_size_str
+                INT 21H
+
+                MOV AH, 09H
+                MOV DX, offset output_message2
+                INT 21H
 
             JMP exit
         activity_6:
